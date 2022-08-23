@@ -1,0 +1,67 @@
+require("dotenv").config();
+import { Sequelize } from "sequelize";
+
+import { UserModel } from "./user.model";
+import { RoleModel } from "./role.model";
+import { ContactModel } from "./contact.model";
+import { TagModel } from "./blog/tag.model";
+import { ArticleModel } from "./blog/article.model";
+
+//Connect to SQL database
+const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
+const sequelize = new Sequelize(
+  DB_NAME as string,
+  DB_USER as string,
+  DB_PASSWORD as string,
+  {
+    host: DB_HOST as string,
+    port: DB_PORT as any,
+    dialect: "mysql",
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
+  }
+);
+
+const Database: any = {};
+
+// Build database
+Database.Sequelize = Sequelize;
+Database.sequelize = sequelize;
+
+// Users && Token
+Database.users = UserModel(sequelize, Sequelize);
+Database.roles = RoleModel(sequelize, Sequelize);
+Database.ROLES = ["user", "moderator", "admin"];
+
+// Blogs
+Database.tag = TagModel(sequelize, Sequelize);
+Database.article = ArticleModel(sequelize, Sequelize);
+
+//User_roles foreign_key [roleId, userId]
+Database.roles.belongsToMany(Database.users, {
+  through: "user_roles",
+  foreignKey: "roleId",
+  otherKey: "userId",
+});
+
+//tags foreign_key [tagId]
+Database.article.belongsTo(Database.tag, {
+  through: "articles",
+  foreignKey: "tagId",
+});
+
+//Roles foreign_key [userId, roleId]
+Database.users.belongsToMany(Database.roles, {
+  through: "user_roles",
+  foreignKey: "userId",
+  otherKey: "roleId",
+});
+
+//Contact
+Database.contacts = ContactModel(sequelize, Sequelize);
+
+export = Database;

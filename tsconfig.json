@@ -3,12 +3,11 @@
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2015",
     "esModuleInterop": true
   },
+  "esm": true,
   "compileOnSave": true,
-  "include": ["src"]
+  "include": ["src", "./serve.ts"]
 }

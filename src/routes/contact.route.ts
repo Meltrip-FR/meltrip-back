@@ -1,6 +1,5 @@
-import * as core from "express-serve-static-core";
 import { CreateContact } from "../controllers/contact.controller";
 
-export const ContactRoute = (app: core.Express) => {
+export const ContactRoute = (app: any) => {
   app.post("/contact", CreateContact);
 };

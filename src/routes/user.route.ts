@@ -1,4 +1,3 @@
-import * as core from "express-serve-static-core";
 import {
   verifyToken,
   isAdmin,
@@ -15,7 +14,7 @@ import {
   DeleteUser,
 } from "../controllers/user.controller";
 
-export const UserRoute = (app: core.Express) => {
+export const UserRoute = (app: any) => {
   app.use((req: any, res: any, next: any) => {
     res.header(
       "Access-Control-Allow-Headers",

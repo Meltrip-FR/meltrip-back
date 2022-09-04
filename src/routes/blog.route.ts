@@ -1,4 +1,3 @@
-import * as core from "express-serve-static-core";
 import {
   createTag,
   findAllTag,
@@ -21,7 +20,7 @@ import {
 } from "../controllers/blog/article.controller";
 import { isModeratorOrAdmin, verifyToken } from "./middleware/authJwt";
 
-export const BlogRoute = (app: core.Express) => {
+export const BlogRoute = (app: any) => {
   app.use((req: any, res: any, next: any) => {
     res.header(
       "Access-Control-Allow-Headers",

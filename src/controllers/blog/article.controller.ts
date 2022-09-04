@@ -117,9 +117,8 @@ export const updateArticle = (req: any, res: any) => {
 
 export const deleteArticle = (req: any, res: any) => {
   const { id } = req.params;
-
   Article.destroy({
-    where: id,
+    where: { id: id },
   })
     .then((num: number) => {
       if (num == 1) {

@@ -1,8 +1,7 @@
-import * as core from "express-serve-static-core";
 import { VerifySignUp } from "./middleware/verifySignUp";
 import { Signup, Signin } from "../controllers/auth.controller";
 
-export const AuthRoute = (app: core.Express) => {
+export const AuthRoute = (app: any) => {
   app.use((req: any, res: any, next: any) => {
     res.header(
       "Access-Control-Allow-Headers",

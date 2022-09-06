@@ -11,9 +11,6 @@ export const ArticleModel = (sequelize: any, Sequelize: any) => {
       text: {
         type: Sequelize.TEXT,
       },
-      pictureURL: {
-        type: Sequelize.TEXT,
-      },
       slug: {
         type: Sequelize.TEXT,
       },

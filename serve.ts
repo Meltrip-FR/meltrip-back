@@ -1,5 +1,5 @@
 require("dotenv").config();
-import express from "express";
+import Express from "express";
 import cors from "cors";
 // import fileupload from "express-fileupload";
 
@@ -15,11 +15,11 @@ import { BlogRoute } from "./src/routes/blog.route";
 // Constant
 let { PORT } = process.env;
 
-const app = express();
+const app: Express.Application = Express();
 
 app.use(cors());
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json({ limit: "50mb" }));
+app.use(Express.urlencoded({ limit: "50mb", extended: true }));
+app.use(Express.json({ limit: "50mb" }));
 // app.use(fileupload());
 
 //Sequelize
@@ -33,7 +33,7 @@ ContactRoute(app);
 BlogRoute(app);
 
 //Define Project API
-app.get("/", (req, res) => {
+app.get("/", (_req: Express.Request, res: Express.Response) => {
   res.json({ message: "Welcome to MELTRIP application." });
 });
 

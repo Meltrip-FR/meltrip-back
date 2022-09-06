@@ -24,7 +24,6 @@ export const createImage = (req: any, res: any) => {
 
 export const findOneImage = (req: any, res: any) => {
   const { id } = req.params;
-
   Image.findByPk(id)
     .then((data: any) => {
       res.send(data);

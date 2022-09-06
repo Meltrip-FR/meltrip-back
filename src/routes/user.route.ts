@@ -1,3 +1,4 @@
+import Express from "express";
 import {
   verifyToken,
   isAdmin,
@@ -15,13 +16,19 @@ import {
 } from "../controllers/user.controller";
 
 export const UserRoute = (app: any) => {
-  app.use((req: any, res: any, next: any) => {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
-  });
+  app.use(
+    (
+      _req: Express.Request,
+      res: Express.Response,
+      next: Express.NextFunction
+    ) => {
+      res.header(
+        "Access-Control-Allow-Headers",
+        "x-access-token, Origin, Content-Type, Accept"
+      );
+      next();
+    }
+  );
 
   app.get("/users/", [verifyToken, isModeratorOrAdmin], FindAll);
   app.get("/user/", [verifyToken], UserBoard);

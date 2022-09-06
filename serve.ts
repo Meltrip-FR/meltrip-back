@@ -22,11 +22,11 @@ app.use(Express.urlencoded({ limit: "50mb", extended: true }));
 app.use(Express.json({ limit: "50mb" }));
 // app.use(fileupload());
 
-//Sequelize
+// Sequelize
 CleanDataBase(false); //Remove Database: true || false
 Database.sequelize.sync();
 
-//Imports Routes
+// Imports Routes
 AuthRoute(app);
 UserRoute(app);
 ContactRoute(app);

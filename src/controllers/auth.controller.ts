@@ -7,7 +7,7 @@ import Database from "../models";
 // Types
 import { RolesList } from "../types/Default";
 import { Roles } from "../types/Roles";
-import { User } from "../types/User";
+//import { User } from "../types/User";
 
 const Op = Database.Sequelize.Op;
 
@@ -19,7 +19,6 @@ const Signup = (req: Express.Request, res: Express.Response) => {
   dbUsers
     .create({ ...req.body, password: bcrypt.hashSync(req.body.password, 8) })
     .then((user: any) => {
-      console.log({ user });
       if (req.body.roles) {
         dbRoles
           .findAll({
@@ -52,7 +51,7 @@ const Signin = (req: Express.Request, res: Express.Response) => {
         email: req.body.email,
       },
     })
-    .then((user: User): void => {
+    .then((user: any): void => {
       if (!user) {
         res.status(404).send({ message: "User Not found." });
       }
@@ -77,21 +76,21 @@ const Signin = (req: Express.Request, res: Express.Response) => {
       );
 
       const authorities: any = [];
-      dbUsers.getRoles().then((roles: Roles[]) => {
+      user.getRoles().then((roles: Roles[]) => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push(("ROLE_" + roles[i].name).toUpperCase());
         }
         res.status(200).send({
           id: user.id,
-          firstname: user.firstName,
-          lastname: user.lastName,
+          firstname: user.firstname,
+          lastname: user.lastname,
           email: user.email,
           roles: authorities,
           accessToken: token,
         });
       });
     })
-    .catch((err: any) => {
+    .catch((err: TypeError) => {
       res.status(500).send({ message: err.message });
     });
 };

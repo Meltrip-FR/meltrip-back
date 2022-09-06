@@ -2,7 +2,7 @@ import Express from "express";
 import Database from "../../models";
 
 // Types
-import { Tag } from "../../types/tag";
+import { Tag } from "../../types/Tag";
 
 const dbTag = Database.tag;
 const Op = Database.Sequelize.Op;

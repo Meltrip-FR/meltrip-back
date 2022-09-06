@@ -6,7 +6,7 @@ import { getPagination, getPagingData } from "../../utils/paginate";
 import { findOnebyName } from "./tag.controller";
 
 // Types
-import { Article } from "../../types/article";
+import { Article } from "../../types/Article";
 
 const dbArticle = Database.article;
 const Op = Database.Sequelize.Op;

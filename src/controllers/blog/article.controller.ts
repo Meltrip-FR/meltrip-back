@@ -11,8 +11,8 @@ import { Article } from "../../types/article";
 const dbArticle = Database.article;
 const Op = Database.Sequelize.Op;
 
-export const createArticle = (
-  req: Express.Request,
+export const createArticle = <T>(
+  req: Express.Request<T>,
   res: Express.Response
 ): void => {
   const { title, description, text, slug, status, authorId, tagId } =
@@ -44,8 +44,8 @@ export const createArticle = (
     });
 };
 
-export const findAllArticle = async (
-  req: Express.Request<{ body: { tag: string } }>,
+export const findAllArticle = async <T>(
+  req: Express.Request<T>,
   res: Express.Response
 ) => {
   // Path = /blog/articles?tag=stringName
@@ -119,8 +119,11 @@ export const findOneArticle = (req: Express.Request, res: Express.Response) => {
     });
 };
 
-export const updateArticle = (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params;
+export const updateArticle = <T>(
+  req: Express.Request<T>,
+  res: Express.Response
+) => {
+  const { id } = req.params as any;
   dbArticle
     .update(req.body as Article, {
       where: { id: id },
@@ -144,8 +147,11 @@ export const updateArticle = (req: Express.Request, res: Express.Response) => {
     });
 };
 
-export const deleteArticle = (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params;
+export const deleteArticle = <T>(
+  req: Express.Request<T>,
+  res: Express.Response
+) => {
+  const { id } = req.params as any;
   dbArticle
     .destroy({
       where: { id: id },

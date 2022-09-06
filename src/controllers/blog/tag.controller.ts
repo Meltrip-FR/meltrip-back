@@ -11,8 +11,8 @@ export const toNormalForm = (str: string) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };
 
-export const createTag = (
-  req: Express.Request,
+export const createTag = <T>(
+  req: Express.Request<T>,
   res: Express.Response
 ): void => {
   const { name, slug } = req.body;
@@ -34,7 +34,10 @@ export const createTag = (
     });
 };
 
-export const findAllTag = (req: Express.Request, res: Express.Response) => {
+export const findAllTag = <T>(
+  req: Express.Request<T>,
+  res: Express.Response
+) => {
   const { name } = req.query;
 
   let condition = name && { name: { [Op.like]: `%${name}%` } };
@@ -50,8 +53,11 @@ export const findAllTag = (req: Express.Request, res: Express.Response) => {
     });
 };
 
-export const findOneTag = (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params;
+export const findOneTag = <T>(
+  req: Express.Request<T>,
+  res: Express.Response
+) => {
+  const { id } = req.params as any;
   console.log(id);
   dbTag
     .findByPk(id)
@@ -78,8 +84,11 @@ export const findOnebyName = async (value: string) => {
     });
 };
 
-export const updateTag = (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params;
+export const updateTag = <T>(
+  req: Express.Request<T>,
+  res: Express.Response
+) => {
+  const { id } = req.params as any;
   dbTag
     .update(req.body as Tag, {
       where: { id },
@@ -96,15 +105,18 @@ export const updateTag = (req: Express.Request, res: Express.Response) => {
         });
       }
     })
-    .catch((error: TypeError) => {
+    .catch((_error: TypeError) => {
       res.status(500).send({
         message: "Error updating Tag with id=" + id,
       });
     });
 };
 
-export const deleteTag = (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params;
+export const deleteTag = <T>(
+  req: Express.Request<T>,
+  res: Express.Response
+) => {
+  const { id } = req.params as any;
   dbTag
     .destroy({
       where: { id },
@@ -120,7 +132,7 @@ export const deleteTag = (req: Express.Request, res: Express.Response) => {
         });
       }
     })
-    .catch((error?: TypeError) => {
+    .catch((_error: TypeError) => {
       res.status(500).send({
         message: "Could not delete Tag with id=" + id,
       });

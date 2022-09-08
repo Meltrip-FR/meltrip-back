@@ -6,6 +6,7 @@ import { RoleModel } from "./role.model";
 import { ContactModel } from "./contact.model";
 import { TagModel } from "./blog/tag.model";
 import { ArticleModel } from "./blog/article.model";
+import { KeyModel } from "./key.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -40,6 +41,9 @@ Database.ROLES = ["user", "moderator", "admin"];
 // Blogs
 Database.tag = TagModel(sequelize, Sequelize);
 Database.article = ArticleModel(sequelize, Sequelize);
+
+// Key Token
+Database.keyAPI = KeyModel(sequelize, Sequelize);
 
 //User_roles foreign_key [roleId, userId]
 Database.roles.belongsToMany(Database.users, {

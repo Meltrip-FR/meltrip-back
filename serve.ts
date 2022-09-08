@@ -8,6 +8,7 @@ import Database from "./src/models";
 
 // Routes
 import { AuthRoute } from "./src/routes/auth.route";
+import { KeyRoute } from "./src/routes/key.route";
 import { UserRoute } from "./src/routes/user.route";
 import { ContactRoute } from "./src/routes/contact.route";
 import { BlogRoute } from "./src/routes/blog.route";
@@ -28,6 +29,7 @@ Database.sequelize.sync();
 
 // Imports Routes
 AuthRoute(app);
+KeyRoute(app);
 UserRoute(app);
 ContactRoute(app);
 BlogRoute(app);
@@ -37,6 +39,6 @@ app.get("/", (_req: Express.Request, res: Express.Response) => {
   res.json({ message: "Welcome to MELTRIP application." });
 });
 
-app.listen(PORT, () => {
+app.listen(4545, () => {
   console.log(`Example app listening on PORT ${PORT}`);
 });

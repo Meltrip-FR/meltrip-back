@@ -23,6 +23,7 @@
     "firebase-tools": "^11.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
+    "node-mailjet": "^5.1.1",
     "nodemon": "^2.0.16",
     "sequelize": "^6.21.0",
     "ts-node": "^10.8.0",

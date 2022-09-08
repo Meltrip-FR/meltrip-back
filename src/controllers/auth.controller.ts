@@ -7,6 +7,7 @@ import Database from "../models";
 // Types
 import { RolesList } from "../types/Default";
 import { Roles } from "../types/Roles";
+import { addInMailjet } from "../functions/mailjet";
 //import { User } from "../types/User";
 
 const Op = Database.Sequelize.Op;
@@ -30,11 +31,20 @@ const Signup = (req: Express.Request, res: Express.Response) => {
           })
           .then((roles: RolesList) => {
             user.setRoles(roles).then(() => {
-              res.send({ message: "User was registered successfully!" });
+              if (req.body.newsletter) {
+                addInMailjet(req.body.email).then(() => {
+                  res.send({ message: "User was registered successfully!" });
+                });
+              }
             });
           });
       } else {
         user.setRoles([1]).then(() => {
+          if (req.body.newsletter) {
+            addInMailjet(req.body.email).then(() => {
+              res.send({ message: "User was registered successfully!" });
+            });
+          }
           res.send({ message: "User was registered successfully!" });
         });
       }

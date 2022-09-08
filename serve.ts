@@ -8,10 +8,10 @@ import Database from "./src/models";
 
 // Routes
 import { AuthRoute } from "./src/routes/auth.route";
-import { KeyRoute } from "./src/routes/key.route";
 import { UserRoute } from "./src/routes/user.route";
 import { ContactRoute } from "./src/routes/contact.route";
 import { BlogRoute } from "./src/routes/blog.route";
+import { NewsletterRoute } from "./src/routes/newsletter.route";
 
 // Constant
 let { PORT } = process.env;
@@ -29,7 +29,7 @@ Database.sequelize.sync();
 
 // Imports Routes
 AuthRoute(app);
-KeyRoute(app);
+NewsletterRoute(app);
 UserRoute(app);
 ContactRoute(app);
 BlogRoute(app);

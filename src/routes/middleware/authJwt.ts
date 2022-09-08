@@ -1,5 +1,6 @@
 import Express from "express";
 import jwt from "jsonwebtoken";
+
 import Database from "../../models";
 import { User } from "../../types/User";
 

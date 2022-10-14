@@ -1,5 +1,6 @@
 import Express from "express";
-import { addInMailjet } from "../functions/mailjet";
+import { MJ_CONTACTLIST_NEWSLETTER } from "../constants/mailjet";
+import { postUserInContactList } from "../functions/mailjet";
 import Database from "../models";
 
 const dbNewsletter = Database.article;
@@ -21,9 +22,11 @@ export const SigninNewsletter = (
         });
       });
 
-    addInMailjet(req.body.email).then(() => {
-      res.send({ message: "User was registered successfully!" });
-    });
+    postUserInContactList(req.body.email, MJ_CONTACTLIST_NEWSLETTER).then(
+      () => {
+        res.send({ message: "User was registered successfully!" });
+      }
+    );
   } catch (error: any) {
     res.send(error);
   }

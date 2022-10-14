@@ -5,19 +5,6 @@ import Database from "../models";
 
 const Users = Database.users;
 
-export const UserBoard = (_req: Express.Request, res: Express.Response) => {
-  res.status(200).send("User Content.");
-};
-export const AdminBoard = (_req: Express.Request, res: Express.Response) => {
-  res.status(200).send("Admin Content.");
-};
-export const ModeratorBoard = (
-  _req: Express.Request,
-  res: Express.Response
-) => {
-  res.status(200).send("Moderator Content.");
-};
-
 export const FindOne = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Users.findByPk(id)
@@ -43,7 +30,6 @@ export const FindAll = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
-
 export const UpdateUser = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Users.update(
@@ -70,7 +56,6 @@ export const UpdateUser = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
-
 export const DeleteUser = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Users.destroy({

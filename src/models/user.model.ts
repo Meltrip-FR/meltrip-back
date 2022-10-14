@@ -2,6 +2,9 @@ export const UserModel = (sequelize: any, Sequelize: any) => {
   return sequelize.define(
     "users",
     {
+      userTag: {
+        type: Sequelize.STRING,
+      },
       firstname: {
         type: Sequelize.STRING,
       },
@@ -17,17 +20,8 @@ export const UserModel = (sequelize: any, Sequelize: any) => {
       phone: {
         type: Sequelize.STRING,
       },
-      address: {
-        type: Sequelize.STRING,
-      },
-      city: {
-        type: Sequelize.STRING,
-      },
-      zip: {
-        type: Sequelize.STRING,
-      },
-      firebasePictureId: {
-        type: Sequelize.STRING,
+      confirmEmail: {
+        type: Sequelize.BOOLEAN,
       },
       terms: {
         type: Sequelize.BOOLEAN,

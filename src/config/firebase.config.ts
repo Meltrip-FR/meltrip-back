@@ -1,6 +1,6 @@
 require("dotenv").config();
 import { initializeApp } from "firebase-admin/app";
-import { getStorage } from "firebase-admin/storage";
+// import { getStorage } from "firebase-admin/storage";
 
 const firebaseConfig = {
   apiKey: process.env.FBASE_API_KEY,
@@ -12,6 +12,6 @@ const firebaseConfig = {
   measurementId: process.env.FBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-
-export const storage = getStorage(app).bucket("gs://meltrip-prod.appspot.com");
+initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
+// export const storage = getStorage(app).bucket("gs://meltrip-prod.appspot.com");

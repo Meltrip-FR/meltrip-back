@@ -2,7 +2,6 @@ import Express from "express";
 import jwt from "jsonwebtoken";
 
 import Database from "../../models";
-import { User } from "../../types/User";
 
 const dbUser = Database.users;
 
@@ -49,50 +48,6 @@ export const isAdmin = (
         message: "Require Admin Role!",
       });
       return;
-    });
-  });
-};
-
-export const isModerator = (
-  req: Express.Request<{ body: { userId: number } }>,
-  res: Express.Response,
-  next: Express.NextFunction
-) => {
-  dbUser.findByPk(req.body.userId).then((user: any) => {
-    user.getRoles().then((roles: any) => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
-          next();
-          return;
-        }
-      }
-      res.status(403).send({
-        message: "Require Moderator Role!",
-      });
-    });
-  });
-};
-
-export const isModeratorOrAdmin = (
-  req: Express.Request<{ body: { userId: number } }>,
-  res: Express.Response,
-  next: Express.NextFunction
-) => {
-  dbUser.findByPk(req.body.userId).then((user: User) => {
-    dbUser.getRoles().then((roles: any) => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
-          next();
-          return;
-        }
-        if (roles[i].name === "admin") {
-          next();
-          return;
-        }
-      }
-      res.status(403).send({
-        message: "Require Moderator or Admin Role!",
-      });
     });
   });
 };

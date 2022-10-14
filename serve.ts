@@ -39,6 +39,6 @@ app.get("/", (_req: Express.Request, res: Express.Response) => {
   res.json({ message: "Welcome to MELTRIP application." });
 });
 
-app.listen(4545, () => {
+app.listen(PORT, () => {
   console.log(`Example app listening on PORT ${PORT}`);
 });

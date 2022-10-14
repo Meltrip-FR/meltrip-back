@@ -1,13 +1,12 @@
 export interface User {
-  id: number;
+  id?: number;
+  userTag: string;
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
+  password?: string;
   phone: string;
-  city: string;
-  address: string;
-  zip: number;
+  confirmEmail: boolean;
   terms: boolean;
   newsletter: boolean;
 }

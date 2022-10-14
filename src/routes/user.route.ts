@@ -1,14 +1,6 @@
 import Express from "express";
+import { verifyToken, isAdmin } from "./middleware/authJwt";
 import {
-  verifyToken,
-  isAdmin,
-  isModerator,
-  isModeratorOrAdmin,
-} from "./middleware/authJwt";
-import {
-  UserBoard,
-  ModeratorBoard,
-  AdminBoard,
   FindAll,
   FindOne,
   UpdateUser,
@@ -30,10 +22,7 @@ export const UserRoute = (app: any) => {
     }
   );
 
-  app.get("/users/", [verifyToken, isModeratorOrAdmin], FindAll);
-  app.get("/user/", [verifyToken], UserBoard);
-  app.get("/moderator/", [verifyToken, isModerator], ModeratorBoard);
-  app.get("/administator/", [verifyToken, isAdmin], AdminBoard);
+  app.get("/users/", [verifyToken, isAdmin], FindAll);
   app.get("/user/:id/", FindOne);
   app.put("/user/:id/", UpdateUser);
   app.delete("/user/:id", DeleteUser);

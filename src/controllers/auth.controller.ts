@@ -5,43 +5,49 @@ import bcrypt from "bcryptjs";
 import Database from "../models";
 
 // Types
+//import { User } from "../types/User";
 import { RolesList } from "../types/Default";
 import { Roles } from "../types/Roles";
-import { addInMailjet } from "../functions/mailjet";
-//import { User } from "../types/User";
+import { postUserInContactList } from "../functions/mailjet";
+
+// Constants
+import { MJ_CONTACTLIST_NEWSLETTER } from "../constants/mailjet";
 
 const Op = Database.Sequelize.Op;
 
-const dbUsers = Database.users;
-const dbRoles = Database.roles;
+const Users = Database.users;
+const Roles = Database.roles;
 
 const Signup = (req: Express.Request, res: Express.Response) => {
+  const { roles, email, newsletter } = req.body;
   // Save User to Database
-  dbUsers
-    .create({ ...req.body, password: bcrypt.hashSync(req.body.password, 8) })
+  Users.create({
+    ...req.body,
+    //password: bcrypt.hashSync(req.body.password, 8)
+  })
     .then((user: any) => {
-      if (req.body.roles) {
-        dbRoles
-          .findAll({
-            where: {
-              name: {
-                [Op.or]: req.body.roles,
-              },
+      if (roles) {
+        Roles.findAll({
+          where: {
+            name: {
+              [Op.or]: roles,
             },
-          })
-          .then((roles: RolesList) => {
-            user.setRoles(roles).then(() => {
-              if (req.body.newsletter) {
-                addInMailjet(req.body.email).then(() => {
+          },
+        }).then((roles: RolesList) => {
+          user.setRoles(roles).then(() => {
+            if (newsletter) {
+              postUserInContactList(email, MJ_CONTACTLIST_NEWSLETTER).then(
+                () => {
                   res.send({ message: "User was registered successfully!" });
-                });
-              }
-            });
+                }
+              );
+            }
           });
+        });
       } else {
         user.setRoles([1]).then(() => {
-          if (req.body.newsletter) {
-            addInMailjet(req.body.email).then(() => {
+          if (newsletter) {
+            postUserInContactList(email, MJ_CONTACTLIST_NEWSLETTER).then(() => {
               res.send({ message: "User was registered successfully!" });
             });
           }
@@ -55,12 +61,11 @@ const Signup = (req: Express.Request, res: Express.Response) => {
 };
 
 const Signin = (req: Express.Request, res: Express.Response) => {
-  dbUsers
-    .findOne({
-      where: {
-        email: req.body.email,
-      },
-    })
+  Users.findOne({
+    where: {
+      email: req.body.email,
+    },
+  })
     .then((user: any): void => {
       if (!user) {
         res.status(404).send({ message: "User Not found." });

@@ -18,6 +18,43 @@ export const FindOne = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
+export const FindOneByEmail = (req: Express.Request, res: Express.Response) => {
+  const { email } = req.params;
+  Users.findOne({
+    where: {
+      email: email,
+    },
+  })
+    .then((data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        error,
+        message: "Error retrieving user with email=" + email,
+      });
+    });
+};
+export const FindOneByUserTag = (
+  req: Express.Request,
+  res: Express.Response
+) => {
+  const { userTag } = req.params;
+  Users.findOne({
+    where: {
+      userTag: userTag,
+    },
+  })
+    .then((data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        error,
+        message: "Error retrieving user with userTag=" + userTag,
+      });
+    });
+};
 export const FindAll = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Users.findAll()
@@ -30,14 +67,16 @@ export const FindAll = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
+
 export const UpdateUser = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
-  Users.update(
-    { ...req.body, password: bcrypt.hashSync(req.body.password, 8) },
-    {
-      where: { id: id },
-    }
-  )
+  const { password } = req.body;
+  const data = password
+    ? { ...req.body, password: bcrypt.hashSync(req.body.password, 8) }
+    : { ...req.body };
+  Users.update(data, {
+    where: { id: id },
+  })
     .then((num: number) => {
       if (num == 1) {
         res.send({

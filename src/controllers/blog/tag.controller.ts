@@ -58,7 +58,6 @@ export const findOneTag = <T>(
   res: Express.Response
 ) => {
   const { id } = req.params as any;
-  console.log(id);
   dbTag
     .findByPk(id)
     .then((data: Tag) => {

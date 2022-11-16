@@ -5,10 +5,7 @@ export const UserModel = (sequelize: any, Sequelize: any) => {
       userTag: {
         type: Sequelize.STRING,
       },
-      firstname: {
-        type: Sequelize.STRING,
-      },
-      lastname: {
+      username: {
         type: Sequelize.STRING,
       },
       email: {

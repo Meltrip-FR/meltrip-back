@@ -1,7 +1,9 @@
 import Express from "express";
-import { MJ_CONTACTLIST_NEWSLETTER } from "../constants/mailjet";
-import { postUserInContactList } from "../functions/mailjet";
+import { postUserInContactList } from "../functions/mailjet/main";
 import Database from "../models";
+
+// Constant
+import { MJ_CONTACTLIST_NEWSLETTER } from "../constants/mailjet";
 
 const dbNewsletter = Database.article;
 

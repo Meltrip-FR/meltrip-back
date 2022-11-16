@@ -7,6 +7,7 @@ import { ContactModel } from "./contact.model";
 import { TagModel } from "./blog/tag.model";
 import { ArticleModel } from "./blog/article.model";
 import { NewsletterModel } from "./newsletter.model";
+import { SeminarModel } from "./seminar.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -37,6 +38,9 @@ Database.sequelize = sequelize;
 Database.users = UserModel(sequelize, Sequelize);
 Database.roles = RoleModel(sequelize, Sequelize);
 Database.ROLES = ["user", "moderator", "admin"];
+
+// Seminar
+Database.seminars = SeminarModel(sequelize, Sequelize);
 
 // Blogs
 Database.tag = TagModel(sequelize, Sequelize);

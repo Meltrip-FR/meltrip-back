@@ -21,7 +21,7 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       endDate: {
         type: Sequelize.DATE,
       },
-      type: {
+      typeSeminar: {
         type: Sequelize.ENUM,
         values: ["Intégration", "Formation", "Management", "Commercial"],
       },

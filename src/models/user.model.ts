@@ -7,7 +7,7 @@ export const UserModel = (sequelize: any, Sequelize: any) => {
       },
       civility: {
         type: Sequelize.ENUM,
-        value: ["Mme", "M."],
+        values: ["Mme", "M."],
       },
       username: {
         type: Sequelize.STRING,

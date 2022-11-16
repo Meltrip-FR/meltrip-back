@@ -4,7 +4,7 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
     {
       type: {
         type: Sequelize.ENUM,
-        value: ["company"],
+        values: ["company"],
       },
       billingManager: {
         type: Sequelize.BOOLEAN,

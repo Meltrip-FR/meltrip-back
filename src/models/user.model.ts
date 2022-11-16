@@ -5,6 +5,10 @@ export const UserModel = (sequelize: any, Sequelize: any) => {
       userTag: {
         type: Sequelize.STRING,
       },
+      civility: {
+        type: Sequelize.ENUM,
+        value: ["Mme", "M."],
+      },
       username: {
         type: Sequelize.STRING,
       },

@@ -41,6 +41,9 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       accompaniedSuggest: {
         type: Sequelize.STRING,
       },
+      idOrganization: {
+        type: Sequelize.INTEGER,
+      },
     },
     {
       paranoid: true,

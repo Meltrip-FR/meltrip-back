@@ -39,6 +39,9 @@ Database.users = UserModel(sequelize, Sequelize);
 Database.roles = RoleModel(sequelize, Sequelize);
 Database.ROLES = ["user", "moderator", "admin"];
 
+// Organizations
+Database.organizations = SeminarModel(sequelize, Sequelize);
+
 // Seminar
 Database.seminars = SeminarModel(sequelize, Sequelize);
 

@@ -6,7 +6,7 @@ export const RoleModel = (sequelize: any, Sequelize: any) => {
     },
     name: {
       type: Sequelize.ENUM,
-      values: ["user", "moderator", "admin"],
+      values: ["user", "admin"],
     },
   });
 };

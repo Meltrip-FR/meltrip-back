@@ -77,7 +77,7 @@ export const UpdateUser = (req: Express.Request, res: Express.Response) => {
   Users.update(data, {
     where: { id: id },
   })
-    .then((num: number) => {
+    .then((num: any) => {
       if (num == 1) {
         res.send({
           message: "User was updated successfully.",

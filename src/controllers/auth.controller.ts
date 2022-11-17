@@ -19,7 +19,6 @@ const Op = Database.Sequelize.Op;
 const Users = Database.users;
 const Roles = Database.roles;
 
-let password = makeWord(8);
 let userTag = makeWord(6);
 
 const include = ["@gmail.com", "@gmail.fr"];
@@ -27,7 +26,6 @@ const include = ["@gmail.com", "@gmail.fr"];
 const Signup = async (req: Express.Request, res: Express.Response) => {
   const { roles, email, newsletter, password } = req.body;
   const isDomain = include.map((e) => email.includes(e)).includes(true);
-
   const isUserTag = async () => {
     const res = await Users.findOne({
       where: {
@@ -140,6 +138,7 @@ const Signin = (req: Express.Request, res: Express.Response) => {
     });
 };
 
+let password = makeWord(8);
 const ForgotPassword = (req: Express.Request, res: Express.Response) => {
   const { email } = req.params;
   Users.findOne({

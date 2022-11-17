@@ -24,12 +24,24 @@ let userTag = makeWord(6);
 
 const include = ["@gmail.com", "@gmail.fr"];
 
-const Signup = (req: Express.Request, res: Express.Response) => {
+const Signup = async (req: Express.Request, res: Express.Response) => {
   const { roles, email, newsletter, password } = req.body;
   const isDomain = include.map((e) => email.includes(e)).includes(true);
+
+  const isUserTag = async () => {
+    const res = await Users.findOne({
+      where: {
+        userTag: userTag,
+      },
+    });
+    if (res) {
+      return (userTag = makeWord(6));
+    } else return userTag;
+  };
+
   Users.create({
     ...req.body,
-    userTag,
+    userTag: await isUserTag(),
     password: bcrypt.hashSync(password, 8),
   })
     .then((user: any) => {
@@ -116,7 +128,7 @@ const Signin = (req: Express.Request, res: Express.Response) => {
         }
         res.status(200).send({
           id: user.id,
-          name: user.name,
+          // name: user.name,
           email: user.email,
           roles: authorities,
           accessToken: token,

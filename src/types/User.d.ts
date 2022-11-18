@@ -1,6 +1,8 @@
 export interface User {
   id?: number;
   userTag: string;
+  username?: string;
+  civility?: string;
   firstname: string;
   lastname: string;
   email: string;

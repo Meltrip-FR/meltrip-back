@@ -6,7 +6,5 @@ export interface DateAt {
 
 export enum RolesList {
   "user",
-  "moderator",
   "admin",
-  toUpperCase,
 }

@@ -3,11 +3,11 @@ import { Sequelize } from "sequelize";
 
 import { UserModel } from "./user.model";
 import { RoleModel } from "./role.model";
-// import { ContactModel } from "./contact.model";
-// import { TagModel } from "./blog/tag.model";
-// import { ArticleModel } from "./blog/article.model";
-// import { NewsletterModel } from "./newsletter.model";
-// import { SeminarModel } from "./seminar.model";
+import { ContactModel } from "./contact.model";
+import { TagModel } from "./blog/tag.model";
+import { ArticleModel } from "./blog/article.model";
+import { NewsletterModel } from "./newsletter.model";
+import { SeminarModel } from "./seminar.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -39,21 +39,21 @@ Database.users = UserModel(sequelize, Sequelize);
 Database.roles = RoleModel(sequelize, Sequelize);
 Database.ROLES = ["user", "admin"];
 
-// // Organizations
-// Database.organizations = SeminarModel(sequelize, Sequelize);
+// Organizations
+Database.organizations = SeminarModel(sequelize, Sequelize);
 
-// // Seminar
-// Database.seminars = SeminarModel(sequelize, Sequelize);
+// Seminar
+Database.seminars = SeminarModel(sequelize, Sequelize);
 
-// // Blogs
-// Database.tag = TagModel(sequelize, Sequelize);
-// Database.article = ArticleModel(sequelize, Sequelize);
+// Blogs
+Database.tag = TagModel(sequelize, Sequelize);
+Database.article = ArticleModel(sequelize, Sequelize);
 
-// // Newsletter
-// Database.newsletter = NewsletterModel(sequelize, Sequelize);
+// Newsletter
+Database.newsletter = NewsletterModel(sequelize, Sequelize);
 
-// //Contact
-// Database.contacts = ContactModel(sequelize, Sequelize);
+//Contact
+Database.contacts = ContactModel(sequelize, Sequelize);
 
 //Roles foreign_key [userId, roleId]
 Database.users.belongsToMany(Database.roles, {
@@ -69,10 +69,10 @@ Database.roles.belongsToMany(Database.users, {
   otherKey: "userId",
 });
 
-// //tags foreign_key [tagId]
-// Database.article.belongsTo(Database.tag, {
-//   through: "articles",
-//   foreignKey: "tagId",
-// });
+//tags foreign_key [tagId]
+Database.article.belongsTo(Database.tag, {
+  through: "articles",
+  foreignKey: "tagId",
+});
 
 export default Database;

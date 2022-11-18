@@ -23,12 +23,12 @@ const UserRoute = (app: any) => {
       next();
     }
   );
-
-  app.get("/users/", [verifyToken, isAdmin], FindAll);
-  app.get("/user/:id/", FindOne);
+  app.get("/users", [verifyToken, isAdmin], FindAll);
+  app.get("/user/:id", [verifyToken], FindOne);
+  app.put("/user/:id", [verifyToken], UpdateUser);
+  app.delete("/user/:id", [verifyToken], DeleteUser);
   app.get("/user/:userTag/tag", FindOneByUserTag);
-  app.get("/user/:email/email", FindOneByEmail);
-  app.put("/user/:id/", UpdateUser);
-  app.delete("/user/:id", DeleteUser);
+  app.get("/user/:email/email", [verifyToken, isAdmin], FindOneByEmail);
 };
+
 export default UserRoute;

@@ -16,7 +16,7 @@ import OrganizationRoute from "./src/routes/organization.route";
 
 // Constant
 let { PORT } = process.env;
-
+const isCleanDatabase = false; // FALSE: updateDB || TRUE:  createDB
 const app: Express.Application = Express();
 
 app.use(cors());
@@ -25,7 +25,7 @@ app.use(Express.json({ limit: "50mb" }));
 // app.use(fileupload());
 
 // Sequelize
-CleanDataBase(true); //Remove Database: true || false
+CleanDataBase(isCleanDatabase);
 
 // Imports Routes
 AuthRoute(app);

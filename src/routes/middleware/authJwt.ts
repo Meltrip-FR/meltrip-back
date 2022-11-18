@@ -1,12 +1,17 @@
 import Express from "express";
 import jwt from "jsonwebtoken";
-
 import Database from "../../models";
 
-const dbUser = Database.users;
+const Users = Database.users;
+
+interface Props {
+  id: number;
+  iat: number;
+  exp: number;
+}
 
 export const verifyToken = (
-  req: Express.Request<{ body: { userId: number } }>,
+  req: Express.Request<Props>,
   res: Express.Response,
   next: Express.NextFunction
 ): void => {
@@ -32,22 +37,30 @@ export const verifyToken = (
 };
 
 export const isAdmin = (
-  req: Express.Request<{ body: { userId: number } }>,
+  req: Express.Request<Props>,
   res: Express.Response,
   next: Express.NextFunction
 ) => {
-  dbUser.findByPk(req.body.userId).then((user: any) => {
-    user.getRoles().then((roles: any) => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "admin") {
-          next();
-          return;
+  let token = req.headers["x-access-token"] as string;
+  const decoded = jwt.decode(token) as Props;
+  Users.findByPk(decoded.id)
+    .then((user: any) => {
+      user.getRoles().then((roles: any) => {
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "admin") {
+            next();
+            return;
+          }
         }
-      }
-      res.status(403).send({
-        message: "Require Admin Role!",
+        res.status(403).send({
+          message: "Require Admin Role!",
+        });
+        return;
       });
-      return;
+    })
+    .catch((_e: TypeError) => {
+      res.status(403).send({
+        message: "User not found !",
+      });
     });
-  });
 };

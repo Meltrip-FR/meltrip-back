@@ -13,7 +13,7 @@ import BlogRoute from "./src/routes/blog.route";
 import NewsletterRoute from "./src/routes/newsletter.route";
 import SeminarRoute from "./src/routes/seminar.route";
 import OrganizationRoute from "./src/routes/organization.route";
-
+import GroupRoute from "./src/routes/group.route";
 // Constant
 let { PORT } = process.env;
 const isCleanDatabase = false; // FALSE: updateDB || TRUE:  createDB
@@ -31,6 +31,7 @@ CleanDataBase(isCleanDatabase);
 AuthRoute(app);
 UserRoute(app);
 OrganizationRoute(app);
+GroupRoute(app);
 SeminarRoute(app);
 BlogRoute(app);
 NewsletterRoute(app);

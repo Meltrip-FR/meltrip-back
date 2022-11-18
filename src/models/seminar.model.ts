@@ -23,11 +23,11 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       },
       typeSeminar: {
         type: Sequelize.ENUM,
-        values: ["Intégration", "Formation", "Management", "Commercial"],
+        values: ["", "Intégration", "Formation", "Management", "Commercial"],
       },
       destinationType: {
         type: Sequelize.ENUM,
-        values: ["Mer", "Ville", "Montagne"],
+        values: ["", "Mer", "Ville", "Montagne"],
       },
       budgetPerPerson: {
         type: Sequelize.INTEGER,
@@ -41,7 +41,10 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       accompaniedSuggest: {
         type: Sequelize.STRING,
       },
-      idOrganization: {
+      idGroup: {
+        type: Sequelize.INTEGER,
+      },
+      idDevis: {
         type: Sequelize.INTEGER,
       },
     },

@@ -6,8 +6,9 @@ import {
   FindOne,
   Update,
 } from "../controllers/seminar.controller";
+import { verifyToken } from "./middleware/authJwt";
 
-const SeminarRoute = (app: Express.Application) => {
+const SeminarRoute = (app: any) => {
   app.use(
     (
       _req: Express.Request,
@@ -22,11 +23,11 @@ const SeminarRoute = (app: Express.Application) => {
     }
   );
 
-  app.post("/seminar", Create);
-  app.get("/seminar", FindOne);
-  app.get("/seminars", FindAll);
-  app.put("/seminar", Update);
-  app.delete("/seminar", Delete);
+  app.post("/seminar", [verifyToken], Create);
+  app.get("/seminar/:id", [verifyToken], FindOne);
+  app.get("/seminars", [verifyToken], FindAll);
+  app.put("/seminar/:id", [verifyToken], Update);
+  app.delete("/seminar/:id", [verifyToken], Delete);
 };
 
 export default SeminarRoute;

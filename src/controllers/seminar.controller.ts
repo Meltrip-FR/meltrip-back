@@ -1,23 +1,19 @@
 import Express from "express";
 import Database from "../models";
 
-const Seminar = Database.seminar;
+const Seminar = Database.seminars;
 
 export const Create = (req: Express.Request, res: Express.Response) => {
-  try {
-    Seminar.create({ ...req.body })
-      .then((data: any) => {
-        res.send(data);
-      })
-      .catch((error: any) => {
-        res.status(500).send({
-          message:
-            error.message || "Some error occured while creating the article",
-        });
+  Seminar.create({ ...req.body })
+    .then((data: any) => {
+      res.send(data);
+    })
+    .catch((error: any) => {
+      res.status(500).send({
+        message:
+          error.message || "Some error occured while creating the seminar",
       });
-  } catch (error: any) {
-    res.send(error);
-  }
+    });
 };
 export const FindOne = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
@@ -73,7 +69,7 @@ export const Update = (req: Express.Request, res: Express.Response) => {
 export const Delete = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Seminar.destroy({
-    where: id,
+    where: { id },
   })
     .then((num: number) => {
       if (num == 1) {

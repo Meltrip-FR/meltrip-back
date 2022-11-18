@@ -10,6 +10,7 @@ import { NewsletterModel } from "./newsletter.model";
 import { SeminarModel } from "./seminar.model";
 import { OrganizationModel } from "./organization.model";
 import { GroupModel } from "./group.model";
+import { PayementModel } from "./payement.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;

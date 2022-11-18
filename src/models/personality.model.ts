@@ -1,15 +1,15 @@
-export const PayementModel = (sequelize: any, Sequelize: any) => {
+export const PersonalityModel = (sequelize: any, Sequelize: any) => {
   return sequelize.define(
-    "payements",
+    "personality",
     {
-      idSeminar: {
+      idGroup: {
         type: Sequelize.INTEGER,
       },
-      urlPayement: {
+      question1: {
         type: Sequelize.STRING,
       },
-      price: {
-        type: Sequelize.INTEGER,
+      question2: {
+        type: Sequelize.STRING,
       },
     },
     {

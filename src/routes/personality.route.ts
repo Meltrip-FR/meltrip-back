@@ -5,9 +5,9 @@ import {
   FindAll,
   Update,
   Delete,
-} from "../controllers/payement.controller";
+} from "../controllers/personality.controller";
 
-const PayementRoute = (app: any) => {
+const PersonalityRoute = (app: any) => {
   app.use(
     (
       _req: Express.Request,
@@ -22,11 +22,11 @@ const PayementRoute = (app: any) => {
     }
   );
 
-  app.post("/payement", Create);
-  app.put("/payement/:id", Update);
-  app.delete("/payement/:id", Delete);
-  app.get("/payement/:id", FindOne);
-  app.get("/payements", FindAll);
+  app.post("/personality", Create);
+  app.put("/personality/:id", Update);
+  app.delete("/personality/:id", Delete);
+  app.get("/personality/:id", FindOne);
+  app.get("/personalitys", FindAll);
 };
 
-export default PayementRoute;
+export default PersonalityRoute;

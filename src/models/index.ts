@@ -11,6 +11,7 @@ import { SeminarModel } from "./seminar.model";
 import { OrganizationModel } from "./organization.model";
 import { GroupModel } from "./group.model";
 import { PayementModel } from "./payement.model";
+import { PersonalityModel } from "./personality.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -56,6 +57,9 @@ Database.quotes = SeminarModel(sequelize, Sequelize);
 
 // Payement
 Database.payements = PayementModel(sequelize, Sequelize);
+
+// personality
+Database.personality = PersonalityModel(sequelize, Sequelize);
 
 // Blogs
 Database.tag = TagModel(sequelize, Sequelize);

@@ -16,6 +16,7 @@ import OrganizationRoute from "./src/routes/organization.route";
 import GroupRoute from "./src/routes/group.route";
 import QuoteRoute from "./src/routes/quote.route";
 import PayementRoute from "./src/routes/payement.route";
+import PersonalityRoute from "./src/routes/personality.route";
 
 // Constant
 let { PORT } = process.env;
@@ -38,6 +39,7 @@ GroupRoute(app);
 SeminarRoute(app);
 QuoteRoute(app);
 PayementRoute(app);
+PersonalityRoute(app);
 BlogRoute(app);
 NewsletterRoute(app);
 ContactRoute(app);

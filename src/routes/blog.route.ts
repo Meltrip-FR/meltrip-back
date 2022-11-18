@@ -21,7 +21,7 @@ import {
 //   deleteImage,
 // } from "../controllers/blog/image.controller";
 
-export const BlogRoute = (app: Express.Application) => {
+const BlogRoute = (app: Express.Application) => {
   app.use(
     (
       _req: Express.Request,
@@ -56,3 +56,5 @@ export const BlogRoute = (app: Express.Application) => {
   // app.get("/blog/image/:id", findOneImage);
   // app.delete("/blog/image/:id", deleteImage);
 };
+
+export default BlogRoute;

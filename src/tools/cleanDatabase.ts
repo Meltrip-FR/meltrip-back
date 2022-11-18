@@ -12,6 +12,22 @@ const CleanDataBase = (force: boolean) => {
 
   //Clear all data in dataBase
   Database.sequelize.sync({ force }).then((e: any) => {
+    console.log(e.connectionManager.config);
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      `Executing (default): Drop Database ${e.connectionManager.config.database}`
+    );
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      "Executing (default): Config Database ",
+      e.connectionManager.config
+    );
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      "Executing (default): Tables models ",
+      e.models
+    );
+
     // Create Role
     dataRole.map((name: string, index: number) =>
       //Create Roles
@@ -19,6 +35,10 @@ const CleanDataBase = (force: boolean) => {
         id: index + 1,
         name,
       })
+    );
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      "Executing (default): Roles has been created"
     );
     //Create user Admin
     Users.create({
@@ -39,15 +59,14 @@ const CleanDataBase = (force: boolean) => {
           },
         }).then((roles: RolesList) => {
           user.setRoles(roles).then(async () => {
-            console.log("Executing (default): Admin has been created");
+            console.log(
+              "\x1b[33m%s\x1b[0m",
+              "Executing (default): Admin has been created"
+            );
           });
         });
       })
       .catch((error: any) => console.error(error));
-
-    console.log("Drop Database =>", e.connectionManager.config.database);
-    console.log("Config Database =>", e.connectionManager.config);
-    console.log("Tables models =>", e.models);
   });
 };
 

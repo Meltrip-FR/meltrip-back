@@ -9,7 +9,7 @@ import {
   FindOneByEmail,
 } from "../controllers/user.controller";
 
-export const UserRoute = (app: any) => {
+const UserRoute = (app: any) => {
   app.use(
     (
       _req: Express.Request,
@@ -31,3 +31,4 @@ export const UserRoute = (app: any) => {
   app.put("/user/:id/", UpdateUser);
   app.delete("/user/:id", DeleteUser);
 };
+export default UserRoute;

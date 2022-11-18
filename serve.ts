@@ -6,11 +6,13 @@ import cors from "cors";
 import CleanDataBase from "./src/tools/cleanDatabase";
 
 // Routes
-// import { AuthRoute } from "./src/routes/auth.route";
-// import { UserRoute } from "./src/routes/user.route";
-// import { ContactRoute } from "./src/routes/contact.route";
-// import { BlogRoute } from "./src/routes/blog.route";
-// import { NewsletterRoute } from "./src/routes/newsletter.route";
+import AuthRoute from "./src/routes/auth.route";
+import UserRoute from "./src/routes/user.route";
+import ContactRoute from "./src/routes/contact.route";
+import BlogRoute from "./src/routes/blog.route";
+import NewsletterRoute from "./src/routes/newsletter.route";
+import SeminarRoute from "./src/routes/seminar.route";
+import OrganizationRoute from "./src/routes/organization.route";
 
 // Constant
 let { PORT } = process.env;
@@ -26,11 +28,13 @@ app.use(Express.json({ limit: "50mb" }));
 CleanDataBase(true); //Remove Database: true || false
 
 // Imports Routes
-// AuthRoute(app);
-// NewsletterRoute(app);
-// UserRoute(app);
-// ContactRoute(app);
-// BlogRoute(app);
+AuthRoute(app);
+UserRoute(app);
+SeminarRoute(app);
+OrganizationRoute(app);
+BlogRoute(app);
+NewsletterRoute(app);
+ContactRoute(app);
 
 //Define Project API
 app.get("/", (_req: Express.Request, res: Express.Response) => {
@@ -38,5 +42,8 @@ app.get("/", (_req: Express.Request, res: Express.Response) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`App listening on PORT ${PORT}`);
+  console.log(
+    "\x1b[33m%s\x1b[0m",
+    `Executing (default): App listening on PORT ${PORT}`
+  );
 });

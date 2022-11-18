@@ -1,5 +1,7 @@
 import { CreateContact } from "../controllers/contact.controller";
 
-export const ContactRoute = (app: any) => {
+const ContactRoute = (app: any) => {
   app.post("/contact", CreateContact);
 };
+
+export default ContactRoute;

@@ -7,7 +7,7 @@ import {
   Update,
 } from "../controllers/seminar.controller";
 
-export const AuthRoute = (app: Express.Application) => {
+const SeminarRoute = (app: Express.Application) => {
   app.use(
     (
       _req: Express.Request,
@@ -28,3 +28,5 @@ export const AuthRoute = (app: Express.Application) => {
   app.put("/seminar", Update);
   app.delete("/seminar", Delete);
 };
+
+export default SeminarRoute;

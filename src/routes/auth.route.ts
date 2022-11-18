@@ -1,7 +1,7 @@
 import { VerifySignUp } from "./middleware/verifySignUp";
 import { Signup, Signin, ForgotPassword } from "../controllers/auth.controller";
 
-export const AuthRoute = (app: any) => {
+const AuthRoute = (app: any) => {
   app.post("/auth/signin", Signin);
   app.post(
     "/auth/signup",
@@ -13,3 +13,5 @@ export const AuthRoute = (app: any) => {
   );
   app.get("/auth/forgotpassword/:email", ForgotPassword);
 };
+
+export default AuthRoute;

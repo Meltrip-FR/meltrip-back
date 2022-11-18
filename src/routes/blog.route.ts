@@ -2,7 +2,6 @@ import Express from "express";
 import { isAdmin, verifyToken } from "./middleware/authJwt";
 import {
   createArticle,
-  findAllArticle,
   findOneArticle,
   updateArticle,
   deleteArticle,
@@ -38,18 +37,17 @@ const BlogRoute = (app: Express.Application) => {
 
   // Articles
   app.post("/blog/article/", [verifyToken, isAdmin], createArticle);
-  app.get("/blog/articles/", findAllArticle);
-  app.get("/blog/articlesPaginate/", findPaginateArticle);
-  app.get("/blog/article/:id", findOneArticle);
   app.put("/blog/article/:id", [verifyToken, isAdmin], updateArticle);
   app.delete("/blog/article/:id", [verifyToken, isAdmin], deleteArticle);
+  app.get("/blog/article/:id", findOneArticle);
+  app.get("/blog/articlesPaginate/", findPaginateArticle);
 
   // Tags
   app.post("/blog/tag/", [verifyToken, isAdmin], createTag);
-  app.get("/blog/tags/", findAllTag);
-  app.get("/blog/tag/:id", findOneTag);
   app.put("/blog/tag/:id", [verifyToken, isAdmin], updateTag);
   app.delete("/blog/tag/:id", [verifyToken, isAdmin], deleteTag);
+  app.get("/blog/tag/:id", findOneTag);
+  app.get("/blog/tags/", findAllTag);
 
   // Image
   // app.post("/blog/image/", createImage);

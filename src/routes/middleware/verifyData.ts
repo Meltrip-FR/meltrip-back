@@ -2,6 +2,7 @@ import Database from "../../models";
 
 const ROLES = Database.ROLES;
 const Users = Database.users;
+const Organizations = Database.organizations;
 
 const checkDuplicateUsernameOrEmail = (req: any, res: any, next: any) => {
   // Email
@@ -13,6 +14,22 @@ const checkDuplicateUsernameOrEmail = (req: any, res: any, next: any) => {
     if (user) {
       res.status(400).send({
         message: "Failed! Email is already in use!",
+      });
+      return;
+    }
+    next();
+  });
+};
+
+const checkDuplicateOrganization = (req: any, res: any, next: any) => {
+  Organizations.findOne({
+    where: {
+      siret: req.body.siret,
+    },
+  }).then((user: any) => {
+    if (user) {
+      res.status(400).send({
+        message: "Failed! Organization is already in use!",
       });
       return;
     }
@@ -34,7 +51,8 @@ const checkRolesExisted = (req: any, res: any, next: any) => {
   next();
 };
 
-export const VerifySignUp = {
+export const verifyData = {
   checkDuplicateUsernameOrEmail,
+  checkDuplicateOrganization,
   checkRolesExisted,
 };

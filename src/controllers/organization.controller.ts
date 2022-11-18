@@ -4,11 +4,6 @@ import Database from "../models";
 const Organizations = Database.organizations;
 
 export const Create = (req: Express.Request, res: Express.Response) => {
-  Organizations.findOne({
-    where: {
-      name: req.body.name,
-    },
-  });
   Organizations.create({ ...req.body })
     .then((data: any) => {
       res.send(data);
@@ -16,7 +11,7 @@ export const Create = (req: Express.Request, res: Express.Response) => {
     .catch((error: any) => {
       res.status(500).send({
         message:
-          error.message || "Some error occured while creating the article",
+          error.message || "Some error occured while creating the organization",
       });
     });
 };
@@ -74,7 +69,7 @@ export const Update = (req: Express.Request, res: Express.Response) => {
 export const Delete = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Organizations.destroy({
-    where: id,
+    where: { id },
   })
     .then((num: number) => {
       if (num == 1) {

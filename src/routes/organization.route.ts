@@ -1,5 +1,12 @@
 import Express from "express";
-import { Create } from "../controllers/organization.controller";
+import {
+  Create,
+  FindOne,
+  FindAll,
+  Update,
+  Delete,
+} from "../controllers/organization.controller";
+import { verifyData } from "./middleware/verifyData";
 
 const OrganizationRoute = (app: any) => {
   app.use(
@@ -16,11 +23,11 @@ const OrganizationRoute = (app: any) => {
     }
   );
 
-  app.post("/organization", Create);
-  // app.get("/organization", FindOne);
-  // app.get("/organizations", FindAll);
-  // app.put("/organization", Update);
-  // app.delete("/organization", Delete);
+  app.post("/organization", [verifyData.checkDuplicateOrganization], Create);
+  app.put("/organization/:id", Update);
+  app.delete("/organization/:id", Delete);
+  app.get("/organization/:id", FindOne);
+  app.get("/organizations", FindAll);
 };
 
 export default OrganizationRoute;

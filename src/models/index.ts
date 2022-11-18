@@ -8,6 +8,7 @@ import { TagModel } from "./blog/tag.model";
 import { ArticleModel } from "./blog/article.model";
 import { NewsletterModel } from "./newsletter.model";
 import { SeminarModel } from "./seminar.model";
+import { OrganizationModel } from "./organization.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -40,7 +41,7 @@ Database.roles = RoleModel(sequelize, Sequelize);
 Database.ROLES = ["user", "admin"];
 
 // Organizations
-Database.organizations = SeminarModel(sequelize, Sequelize);
+Database.organizations = OrganizationModel(sequelize, Sequelize);
 
 // Seminar
 Database.seminars = SeminarModel(sequelize, Sequelize);

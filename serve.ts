@@ -30,8 +30,8 @@ CleanDataBase(isCleanDatabase);
 // Imports Routes
 AuthRoute(app);
 UserRoute(app);
-SeminarRoute(app);
 OrganizationRoute(app);
+SeminarRoute(app);
 BlogRoute(app);
 NewsletterRoute(app);
 ContactRoute(app);

@@ -1,22 +1,54 @@
 import Database from "../models";
+import { RolesList } from "../types/Default";
 
-export const CleanDataBase = (force: boolean) => {
-  // const dataRole = Database.ROLES;
-  // const Role = Database.roles;
+import bcrypt from "bcryptjs";
+
+const CleanDataBase = (force: boolean) => {
+  const Op = Database.Sequelize.Op;
+  const dataRole = Database.ROLES;
+  const Roles = Database.roles;
+  const Users = Database.users;
+  const listRoles = ["user", "admin"];
 
   //Clear all data in dataBase
-  Database.sequelize
-    .sync({ force })
-    .then((e: any) => {
-      console.log("Drop Database =>", e.connectionManager.config.database);
-      console.log("Config Database =>", e.connectionManager.config);
-      console.log("Tables models =>", e.models);
-      // dataRole.map((name: string, index: number) =>
-      //   Role.create({
-      //     id: index + 1,
-      //     name,
-      //   })
-      // );
+  Database.sequelize.sync({ force }).then((e: any) => {
+    // Create Role
+    dataRole.map((name: string, index: number) =>
+      //Create Roles
+      Roles.create({
+        id: index + 1,
+        name,
+      })
+    );
+    //Create user Admin
+    Users.create({
+      username: process.env.ADMIN_USERNAME,
+      email: process.env.ADMIN_EMAIL,
+      password: bcrypt.hashSync(process.env.ADMIN_PASSWORD as string, 8),
+      terms: true,
+      newsletter: false,
+      confirmEmail: true,
+      roles: listRoles,
     })
-    .catch((error: any) => console.error(error));
+      .then((user: any) => {
+        Roles.findAll({
+          where: {
+            name: {
+              [Op.or]: listRoles,
+            },
+          },
+        }).then((roles: RolesList) => {
+          user.setRoles(roles).then(async () => {
+            console.log("Executing (default): Admin has been created");
+          });
+        });
+      })
+      .catch((error: any) => console.error(error));
+
+    console.log("Drop Database =>", e.connectionManager.config.database);
+    console.log("Config Database =>", e.connectionManager.config);
+    console.log("Tables models =>", e.models);
+  });
 };
+
+export default CleanDataBase;

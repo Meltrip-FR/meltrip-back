@@ -126,7 +126,7 @@ const Signin = (req: Express.Request, res: Express.Response) => {
         }
         res.status(200).send({
           id: user.id,
-          // name: user.name,
+          username: user.username,
           email: user.email,
           roles: authorities,
           accessToken: token,

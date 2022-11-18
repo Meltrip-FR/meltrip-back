@@ -2,15 +2,13 @@
   "name": "meltrip-prod",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "start": "node --loader ts-node/esm serve.ts",
     "dev": "nodemon -e ts --exec 'yarn start'",
     "build": "tsc"
   },
   "engines": {
-    "node": "16"
+    "node": ">=16"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

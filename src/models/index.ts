@@ -50,6 +50,12 @@ Database.groups = GroupModel(sequelize, Sequelize);
 // Seminar
 Database.seminars = SeminarModel(sequelize, Sequelize);
 
+// Quote
+Database.quotes = SeminarModel(sequelize, Sequelize);
+
+// Payement
+Database.payements = PayementModel(sequelize, Sequelize);
+
 // Blogs
 Database.tag = TagModel(sequelize, Sequelize);
 Database.article = ArticleModel(sequelize, Sequelize);

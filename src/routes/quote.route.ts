@@ -5,10 +5,9 @@ import {
   FindAll,
   Update,
   Delete,
-} from "../controllers/group.controller";
-import { verifyData } from "./middleware/verifyData";
+} from "../controllers/quote.controller";
 
-const GroupRoute = (app: any) => {
+const QuoteRoute = (app: any) => {
   app.use(
     (
       _req: Express.Request,
@@ -23,11 +22,11 @@ const GroupRoute = (app: any) => {
     }
   );
 
-  app.post("/group", [verifyData.checkDuplicateGroup], Create);
-  app.put("/group/:id", Update);
-  app.delete("/group/:id", Delete);
-  app.get("/group/:id", FindOne);
-  app.get("/groups", FindAll);
+  app.post("/quote", Create);
+  app.put("/quote/:id", Update);
+  app.delete("/quote/:id", Delete);
+  app.get("/quote/:id", FindOne);
+  app.get("/quotes", FindAll);
 };
 
-export default GroupRoute;
+export default QuoteRoute;

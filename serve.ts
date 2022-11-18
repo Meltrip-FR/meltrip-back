@@ -14,6 +14,9 @@ import NewsletterRoute from "./src/routes/newsletter.route";
 import SeminarRoute from "./src/routes/seminar.route";
 import OrganizationRoute from "./src/routes/organization.route";
 import GroupRoute from "./src/routes/group.route";
+import QuoteRoute from "./src/routes/quote.route";
+import PayementRoute from "./src/routes/payement.route";
+
 // Constant
 let { PORT } = process.env;
 const isCleanDatabase = false; // FALSE: updateDB || TRUE:  createDB
@@ -33,6 +36,8 @@ UserRoute(app);
 OrganizationRoute(app);
 GroupRoute(app);
 SeminarRoute(app);
+QuoteRoute(app);
+PayementRoute(app);
 BlogRoute(app);
 NewsletterRoute(app);
 ContactRoute(app);

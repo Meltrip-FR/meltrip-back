@@ -30,6 +30,7 @@ export const createArticle = <T>(
     !description ||
     !text ||
     !slug ||
+    !pictureURL ||
     !status ||
     !authorId ||
     !tagId

@@ -15,8 +15,16 @@ export const createArticle = <T>(
   req: Express.Request<T>,
   res: Express.Response
 ): void => {
-  const { title, description, text, slug, status, authorId, tagId } =
-    req.body as Article;
+  const {
+    title,
+    description,
+    text,
+    slug,
+    pictureURL,
+    status,
+    authorId,
+    tagId,
+  } = req.body as Article;
   if (
     !title ||
     !description ||

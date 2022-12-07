@@ -6,6 +6,7 @@ import {
   updateArticle,
   deleteArticle,
   findPaginateArticle,
+  findAllArticle,
 } from "../controllers/blog/article.controller";
 import {
   createTag,
@@ -40,6 +41,7 @@ const BlogRoute = (app: Express.Application) => {
   app.put("/blog/article/:id", [verifyToken, isAdmin], updateArticle);
   app.delete("/blog/article/:id", [verifyToken, isAdmin], deleteArticle);
   app.get("/blog/article/:id", findOneArticle);
+  app.get("/blog/articles/", findAllArticle);
   app.get("/blog/articlesPaginate/", findPaginateArticle);
 
   // Tags

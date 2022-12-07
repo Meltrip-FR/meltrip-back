@@ -14,6 +14,9 @@ export const ArticleModel = (sequelize: any, Sequelize: any) => {
       slug: {
         type: Sequelize.TEXT,
       },
+      pictureURL: {
+        type: Sequelize.STRING,
+      },
       status: {
         type: Sequelize.BOOLEAN,
       },

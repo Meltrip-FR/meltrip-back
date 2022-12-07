@@ -7,6 +7,7 @@ import {
   DeleteUser,
   FindOneByUserTag,
   FindOneByEmail,
+  ConfirmEmail,
 } from "../controllers/user.controller";
 
 const UserRoute = (app: any) => {
@@ -27,6 +28,7 @@ const UserRoute = (app: any) => {
   app.get("/user/:id", [verifyToken], FindOne);
   app.put("/user/:id", [verifyToken], UpdateUser);
   app.delete("/user/:id", [verifyToken], DeleteUser);
+  app.put("/user/confirm/:id", ConfirmEmail);
   app.get("/user/:userTag/tag", FindOneByUserTag);
   app.get("/user/:email/email", [verifyToken, isAdmin], FindOneByEmail);
 };

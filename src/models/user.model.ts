@@ -30,6 +30,9 @@ export const UserModel = (sequelize: any, Sequelize: any) => {
       newsletter: {
         type: Sequelize.BOOLEAN,
       },
+      idOrganization: {
+        type: Sequelize.INTEGER,
+      },
     },
     {
       paranoid: true,

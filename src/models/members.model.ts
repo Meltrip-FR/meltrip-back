@@ -1,14 +1,11 @@
-export const PersonalityModel = (sequelize: any, Sequelize: any) => {
+export const MembersModel = (sequelize: any, Sequelize: any) => {
   return sequelize.define(
-    "personality",
+    "members",
     {
-      idMember: {
+      idGroup: {
         type: Sequelize.INTEGER,
       },
-      question1: {
-        type: Sequelize.STRING,
-      },
-      question2: {
+      email: {
         type: Sequelize.STRING,
       },
     },

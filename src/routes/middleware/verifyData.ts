@@ -4,6 +4,7 @@ const ROLES = Database.ROLES;
 const Users = Database.users;
 const Organizations = Database.organizations;
 const Groups = Database.groups;
+const Members = Database.members;
 
 const checkDuplicateUsernameOrEmail = (req: any, res: any, next: any) => {
   // Email
@@ -54,6 +55,22 @@ const checkDuplicateGroup = (req: any, res: any, next: any) => {
   });
 };
 
+const checkDuplicateMember = (req: any, res: any, next: any) => {
+  Members.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then((user: any) => {
+    if (user) {
+      res.status(400).send({
+        message: "Failed! Member is already in use!",
+      });
+      return;
+    }
+    next();
+  });
+};
+
 const checkRolesExisted = (req: any, res: any, next: any) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
@@ -72,5 +89,6 @@ export const verifyData = {
   checkDuplicateUsernameOrEmail,
   checkDuplicateOrganization,
   checkDuplicateGroup,
+  checkDuplicateMember,
   checkRolesExisted,
 };

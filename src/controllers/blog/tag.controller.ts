@@ -4,7 +4,7 @@ import Database from "../../models";
 // Types
 import { Tag } from "../../types/Tag";
 
-const dbTag = Database.tag;
+const dbTag = Database.tags;
 const Op = Database.Sequelize.Op;
 
 export const toNormalForm = (str: string) => {

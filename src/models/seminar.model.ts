@@ -44,16 +44,10 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       idUser: {
         type: Sequelize.INTEGER,
       },
-      idOrganization: {
-        type: Sequelize.INTEGER,
-      },
-      idGroup: {
-        type: Sequelize.INTEGER,
-      },
       idPayement: {
         type: Sequelize.INTEGER,
       },
-      idDevis: {
+      idQuote: {
         type: Sequelize.INTEGER,
       },
     },

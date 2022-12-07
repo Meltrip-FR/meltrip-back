@@ -34,7 +34,7 @@ export const sendConfirm = async (
     Messages: [
       {
         From: {
-          Email: "mathieu@meltrip.fr",
+          Email: "contact@meltrip.fr",
           Name: "MELTRIP",
         },
         To: [

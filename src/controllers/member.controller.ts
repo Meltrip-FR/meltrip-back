@@ -1,38 +1,10 @@
 import Express from "express";
 import Database from "../models";
-import axios from "axios";
-import { generatedToken } from "../tools/generatedToken";
 
-const Organizations = Database.organizations;
+const Members = Database.members;
 
-export const Create = async (req: Express.Request, res: Express.Response) => {
-  const newInseeToken = await generatedToken();
-
-  const getOrganization: any = await axios({
-    method: "get",
-    url: `https://api.insee.fr/entreprises/sirene/V3/siret/${req.body.siret}`,
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Encoding": "application/json",
-      Authorization: `Bearer ${newInseeToken}`,
-    },
-  }).catch((e: TypeError) => console.log(e));
-
-  const etablissement = getOrganization.data.etablissement;
-
-  Organizations.create({
-    siret: etablissement.siret,
-    dateCreation: etablissement?.dateCreationEtablissement,
-    denominationUniteLegale:
-      etablissement?.uniteLegale?.denominationUniteLegale,
-    numeroVoie: etablissement?.adresseEtablissement?.numeroVoieEtablissement,
-    typeVoie: etablissement?.adresseEtablissement?.typeVoieEtablissement,
-    voie: etablissement?.adresseEtablissement?.libelleVoieEtablissement,
-    codePostal: etablissement?.adresseEtablissement?.codePostalEtablissement,
-    commune: etablissement?.adresseEtablissement?.libelleCommuneEtablissement,
-    codeCommune: etablissement?.adresseEtablissement?.codePostalEtablissement,
-    cedex: etablissement?.adresseEtablissement?.codeCedexEtablissement,
-  })
+export const Create = (req: Express.Request, res: Express.Response) => {
+  Members.create({ ...req.body })
     .then((data: any) => {
       res.send(data);
     })
@@ -45,20 +17,20 @@ export const Create = async (req: Express.Request, res: Express.Response) => {
 };
 export const FindOne = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
-  Organizations.findByPk(id)
+  Members.findByPk(id)
     .then((data: any) => {
       res.send(data);
     })
     .catch((error: TypeError) => {
       res.status(500).send({
         error,
-        message: "Error retrieving Organizations with id=" + id,
+        message: "Error retrieving Members with id=" + id,
       });
     });
 };
 export const FindAll = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
-  Organizations.findAll()
+  Members.findAll()
     .then(async (data: any) => {
       res.send(data);
     })
@@ -70,7 +42,7 @@ export const FindAll = (req: Express.Request, res: Express.Response) => {
 };
 export const Update = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
-  Organizations.update(
+  Members.update(
     { ...req.body },
     {
       where: { id: id },
@@ -96,23 +68,23 @@ export const Update = (req: Express.Request, res: Express.Response) => {
 };
 export const Delete = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
-  Organizations.destroy({
+  Members.destroy({
     where: { id },
   })
     .then((num: number) => {
       if (num == 1) {
         res.send({
-          message: "Organizations was deleted successfully!",
+          message: "Members was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Organizations with id=${id}. Maybe Organizations was not found!`,
+          message: `Cannot delete Members with id=${id}. Maybe Members was not found!`,
         });
       }
     })
     .catch((_error: TypeError) => {
       res.status(500).send({
-        message: "Could not delete Organizations with id=" + id,
+        message: "Could not delete Members with id=" + id,
       });
     });
 };

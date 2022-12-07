@@ -11,6 +11,8 @@
     "node": ">=16"
   },
   "dependencies": {
+    "@types/node-fetch": "^2.6.2",
+    "axios": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -21,6 +23,7 @@
     "firebase-tools": "^11.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
+    "node-fetch": "^3.3.0",
     "node-mailjet": "^5.1.1",
     "nodemon": "^2.0.16",
     "sequelize": "^6.21.0",

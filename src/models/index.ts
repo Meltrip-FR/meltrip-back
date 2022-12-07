@@ -12,6 +12,9 @@ import { OrganizationModel } from "./organization.model";
 import { GroupModel } from "./group.model";
 import { PayementModel } from "./payement.model";
 import { PersonalityModel } from "./personality.model";
+import ForeignKey from "./foreignkey";
+import { QuoteModel } from "./quote.model";
+import { MembersModel } from "./members.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -42,53 +45,28 @@ Database.sequelize = sequelize;
 Database.users = UserModel(sequelize, Sequelize);
 Database.roles = RoleModel(sequelize, Sequelize);
 Database.ROLES = ["user", "admin"];
-
 // Organizations
 Database.organizations = OrganizationModel(sequelize, Sequelize);
-
 // Groups
 Database.groups = GroupModel(sequelize, Sequelize);
-
+// Members
+Database.members = MembersModel(sequelize, Sequelize);
 // Seminar
 Database.seminars = SeminarModel(sequelize, Sequelize);
-
 // Quote
-Database.quotes = SeminarModel(sequelize, Sequelize);
-
+Database.quotes = QuoteModel(sequelize, Sequelize);
 // Payement
 Database.payements = PayementModel(sequelize, Sequelize);
-
 // personality
 Database.personality = PersonalityModel(sequelize, Sequelize);
-
 // Blogs
-Database.tag = TagModel(sequelize, Sequelize);
-Database.article = ArticleModel(sequelize, Sequelize);
-
+Database.tags = TagModel(sequelize, Sequelize);
+Database.articles = ArticleModel(sequelize, Sequelize);
 // Newsletter
 Database.newsletter = NewsletterModel(sequelize, Sequelize);
-
 //Contact
 Database.contacts = ContactModel(sequelize, Sequelize);
 
-//Roles foreign_key [userId, roleId]
-Database.users.belongsToMany(Database.roles, {
-  through: "user_roles",
-  foreignKey: "userId",
-  otherKey: "roleId",
-});
-
-//User_roles foreign_key [roleId, userId]
-Database.roles.belongsToMany(Database.users, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: "userId",
-});
-
-//tags foreign_key [tagId]
-Database.article.belongsTo(Database.tag, {
-  through: "articles",
-  foreignKey: "tagId",
-});
+ForeignKey(Database);
 
 export default Database;

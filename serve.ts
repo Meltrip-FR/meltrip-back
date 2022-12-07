@@ -17,10 +17,11 @@ import GroupRoute from "./src/routes/group.route";
 import QuoteRoute from "./src/routes/quote.route";
 import PayementRoute from "./src/routes/payement.route";
 import PersonalityRoute from "./src/routes/personality.route";
+import MemberRoute from "./src/routes/member.route";
 
 // Constant
 let { PORT } = process.env;
-const isCleanDatabase = false; // FALSE: updateDB || TRUE:  createDB
+const isCleanDatabase = true; // FALSE: updateDB || TRUE:  createDB
 const app: Express.Application = Express();
 
 app.use(cors());
@@ -36,6 +37,7 @@ AuthRoute(app);
 UserRoute(app);
 OrganizationRoute(app);
 GroupRoute(app);
+MemberRoute(app);
 SeminarRoute(app);
 QuoteRoute(app);
 PayementRoute(app);

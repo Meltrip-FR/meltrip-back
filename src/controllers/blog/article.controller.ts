@@ -8,7 +8,7 @@ import { findOnebyName } from "./tag.controller";
 // Types
 import { Article } from "../../types/Article";
 
-const dbArticle = Database.article;
+const dbArticle = Database.articles;
 const Op = Database.Sequelize.Op;
 
 export const createArticle = <T>(

@@ -5,7 +5,7 @@ import Database from "../models";
 // Constant
 import { MJ_CONTACTLIST_NEWSLETTER } from "../constants/mailjet";
 
-const dbNewsletter = Database.article;
+const dbNewsletter = Database.articles;
 
 export const SigninNewsletter = (
   req: Express.Request,

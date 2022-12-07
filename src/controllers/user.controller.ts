@@ -118,3 +118,29 @@ export const FindOneByUserTag = (
       });
     });
 };
+export const ConfirmEmail = (req: Express.Request, res: Express.Response) => {
+  const { id } = req.params;
+  Users.update(
+    { ...req.body },
+    {
+      where: { id: id },
+    }
+  )
+    .then((num: number) => {
+      if (num == 1) {
+        res.send({
+          message: "User was updated successfully.",
+        });
+      } else {
+        res.send({
+          message:
+            "Cannot update User with id=${id}. Maybe User was not found or req.body is empty!",
+        });
+      }
+    })
+    .catch((_error: TypeError) => {
+      res.status(500).send({
+        message: "Error updating User with id=" + id,
+      });
+    });
+};

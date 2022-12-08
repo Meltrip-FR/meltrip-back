@@ -63,10 +63,10 @@ export const findAllArticle = async <T>(
     return findOnebyName(tag).then((id) => {
       dbArticle
         .findAll({ where: { tagId: id } })
-        .then((data: Article[]) => {
+        .then((data: any) => {
           return res.send(data);
         })
-        .catch((error: TypeError) => {
+        .catch((error: any) => {
           return res.status(500).send({
             message:
               error.message || "Some error occured while retrieving articles",

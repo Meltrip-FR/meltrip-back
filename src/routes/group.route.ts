@@ -23,7 +23,7 @@ const GroupRoute = (app: any) => {
     }
   );
 
-  app.post("/group", [verifyData.checkDuplicateGroup], Create);
+  app.post("/group", Create);
   app.put("/group/:id", Update);
   app.delete("/group/:id", Delete);
   app.get("/group/:id", FindOne);

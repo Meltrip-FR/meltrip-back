@@ -35,7 +35,7 @@ export const FindAllByUserId = (
   const { userId } = req.params;
   Seminar.findAll({
     where: {
-      userId: userId,
+      idUser: userId,
     },
   })
     .then(async (data: any) => {

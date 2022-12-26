@@ -28,6 +28,25 @@ export const FindOne = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
+export const FindAllByUserId = (
+  req: Express.Request,
+  res: Express.Response
+) => {
+  const { userId } = req.params;
+  Seminar.findAll({
+    where: {
+      userId: userId,
+    },
+  })
+    .then(async (data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        message: error.message || "Error retrieving seminar with id=" + userId,
+      });
+    });
+};
 export const FindAll = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Seminar.findAll()
@@ -36,7 +55,7 @@ export const FindAll = (req: Express.Request, res: Express.Response) => {
     })
     .catch((error: TypeError) => {
       res.status(500).send({
-        message: error.message || "Error retrieving basket with id=" + id,
+        message: error.message || "Error retrieving seminar with id=" + id,
       });
     });
 };

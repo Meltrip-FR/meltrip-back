@@ -93,7 +93,7 @@ export const findPaginateArticle = (
   res: Express.Response
 ) => {
   const { page, size, id } = req.query;
-  var condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
+  let condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
   const { limit, offset } = getPagination(page, size);
   dbArticle
     .findAndCountAll({

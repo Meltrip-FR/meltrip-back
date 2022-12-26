@@ -6,7 +6,6 @@ import {
   Update,
   Delete,
 } from "../controllers/group.controller";
-import { verifyData } from "./middleware/verifyData";
 
 const GroupRoute = (app: any) => {
   app.use(

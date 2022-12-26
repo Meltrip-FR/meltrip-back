@@ -3,6 +3,7 @@ import {
   Create,
   Delete,
   FindAll,
+  FindAllByUserId,
   FindOne,
   Update,
 } from "../controllers/seminar.controller";
@@ -25,6 +26,7 @@ const SeminarRoute = (app: any) => {
 
   app.post("/seminar", [verifyToken], Create);
   app.get("/seminar/:id", [verifyToken], FindOne);
+  app.get("/seminars/:userId", [verifyToken], FindAllByUserId);
   app.get("/seminars", [verifyToken], FindAll);
   app.put("/seminar/:id", [verifyToken], Update);
   app.delete("/seminar/:id", [verifyToken], Delete);

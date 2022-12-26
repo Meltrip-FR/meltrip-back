@@ -7,7 +7,6 @@ const Organizations = Database.organizations;
 
 export const Create = async (req: Express.Request, res: Express.Response) => {
   const newInseeToken = await generatedToken();
-
   const getOrganization: any = await axios({
     method: "get",
     url: `https://api.insee.fr/entreprises/sirene/V3/siret/${req.body.siret}`,

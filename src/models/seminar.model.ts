@@ -47,6 +47,14 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       financialPhone: {
         type: Sequelize.STRING,
       },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["", "Attente", "Refusé", "Accepté"],
+      },
+      step: {
+        type: Sequelize.ENUM,
+        values: ["", "devis", "paiement", "question"],
+      },
       idUser: {
         type: Sequelize.INTEGER,
       },

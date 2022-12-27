@@ -35,6 +35,11 @@ const ForeignKey = (Database: any) => {
     foreignKey: "idUser",
   });
   //Seminars foreign_key []
+  Database.seminars.belongsTo(Database.groups, {
+    through: "seminars",
+    foreignKey: "idGroup",
+  });
+  //Seminars foreign_key []
   Database.seminars.belongsTo(Database.payements, {
     through: "seminars",
     foreignKey: "idPayement",

@@ -21,7 +21,7 @@ import MemberRoute from "./src/routes/member.route";
 
 // Constant
 let { PORT } = process.env;
-const isCleanDatabase = false; // FALSE: updateDB || TRUE:  createDB
+const isCleanDatabase = true; // FALSE: updateDB || TRUE:  createDB
 const app: Express.Application = Express();
 
 app.use(cors());

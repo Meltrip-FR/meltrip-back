@@ -13,6 +13,7 @@ const CleanDataBase = (isCleanDatabase: boolean) => {
   Database.sequelize
     .sync({ force: isCleanDatabase, alter: !isCleanDatabase })
     .then((e: any) => {
+      console.log({ e });
       console.log(
         "\x1b[33m%s\x1b[0m",
         `Executing (default): Drop Database ${e.connectionManager.config.database}`

@@ -35,6 +35,11 @@ const ForeignKey = (Database: any) => {
     foreignKey: "idUser",
   });
   //Seminars foreign_key []
+  Database.seminars.belongsTo(Database.organizations, {
+    through: "seminars",
+    foreignKey: "idOrganization",
+  });
+  //Seminars foreign_key []
   Database.seminars.belongsTo(Database.groups, {
     through: "seminars",
     foreignKey: "idGroup",
@@ -48,17 +53,6 @@ const ForeignKey = (Database: any) => {
   Database.seminars.belongsTo(Database.quotes, {
     through: "seminars",
     foreignKey: "idQuote",
-  });
-
-  //Groups foreign_key []
-  Database.groups.belongsTo(Database.organizations, {
-    through: "groups",
-    foreignKey: "idOrganization",
-  });
-  //Groups foreign_key []
-  Database.groups.belongsTo(Database.seminars, {
-    through: "groups",
-    foreignKey: "idSeminar",
   });
 
   //Members foreign_key []

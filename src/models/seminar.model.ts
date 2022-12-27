@@ -5,7 +5,6 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       adultNumber: {
         type: Sequelize.INTEGER,
       },
-      adosNumber: { type: Sequelize.INTEGER },
       knowDate: {
         type: Sequelize.BOOLEAN,
       },
@@ -50,6 +49,9 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
         values: ["", "devis", "paiement", "question"],
       },
       idUser: {
+        type: Sequelize.INTEGER,
+      },
+      idOrganization: {
         type: Sequelize.INTEGER,
       },
       idGroup: {

@@ -41,23 +41,23 @@ const Database: any = {};
 Database.Sequelize = Sequelize;
 Database.sequelize = sequelize;
 
+// Seminar
+Database.seminars = SeminarModel(sequelize, Sequelize);
 // Users && Token
 Database.users = UserModel(sequelize, Sequelize);
 Database.roles = RoleModel(sequelize, Sequelize);
 Database.ROLES = ["user", "admin"];
 // Organizations
 Database.organizations = OrganizationModel(sequelize, Sequelize);
-// Groups
-Database.groups = GroupModel(sequelize, Sequelize);
-// Members
-Database.members = MembersModel(sequelize, Sequelize);
-// Seminar
-Database.seminars = SeminarModel(sequelize, Sequelize);
 // Quote
 Database.quotes = QuoteModel(sequelize, Sequelize);
 // Payement
 Database.payements = PayementModel(sequelize, Sequelize);
-// personality
+// Groups
+Database.groups = GroupModel(sequelize, Sequelize);
+// Members
+Database.members = MembersModel(sequelize, Sequelize);
+// Personality
 Database.personality = PersonalityModel(sequelize, Sequelize);
 // Blogs
 Database.tags = TagModel(sequelize, Sequelize);

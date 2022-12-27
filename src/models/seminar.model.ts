@@ -41,12 +41,6 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       accompaniedSuggest: {
         type: Sequelize.STRING,
       },
-      financialEmail: {
-        type: Sequelize.STRING,
-      },
-      financialPhone: {
-        type: Sequelize.STRING,
-      },
       status: {
         type: Sequelize.ENUM,
         values: ["", "Attente", "Refusé", "Accepté"],

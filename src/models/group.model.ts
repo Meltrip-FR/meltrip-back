@@ -8,14 +8,11 @@ export const GroupModel = (sequelize: any, Sequelize: any) => {
       idOrganization: {
         type: Sequelize.INTEGER,
       },
-      present: {
-        type: Sequelize.BOOLEAN,
-      },
-      email: {
+      financialEmail: {
         type: Sequelize.STRING,
       },
-      resultTest: {
-        type: Sequelize.INTEGER,
+      financialPhone: {
+        type: Sequelize.STRING,
       },
     },
     {

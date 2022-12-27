@@ -8,6 +8,12 @@ export const MembersModel = (sequelize: any, Sequelize: any) => {
       email: {
         type: Sequelize.STRING,
       },
+      present: {
+        type: Sequelize.BOOLEAN,
+      },
+      resultTest: {
+        type: Sequelize.INTEGER,
+      },
     },
     {
       paranoid: true,

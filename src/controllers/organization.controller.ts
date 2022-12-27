@@ -55,6 +55,23 @@ export const FindOne = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
+export const FindOneSiret = (req: Express.Request, res: Express.Response) => {
+  const { siret } = req.params;
+  Organizations.findAll({
+    where: {
+      siret: siret,
+    },
+  })
+    .then(async (data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        message:
+          error.message || "Error retrieving organization with siret=" + siret,
+      });
+    });
+};
 export const FindAll = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Organizations.findAll()

@@ -2,6 +2,7 @@ import Express from "express";
 import {
   Create,
   FindOne,
+  FindOneSiret,
   FindAll,
   Update,
   Delete,
@@ -27,6 +28,7 @@ const OrganizationRoute = (app: any) => {
   app.put("/organization/:id", Update);
   app.delete("/organization/:id", Delete);
   app.get("/organization/:id", FindOne);
+  app.get("/organization/:siret", FindOneSiret);
   app.get("/organizations", FindAll);
 };
 

@@ -57,7 +57,7 @@ export const FindOne = (req: Express.Request, res: Express.Response) => {
 };
 export const FindOneSiret = (req: Express.Request, res: Express.Response) => {
   const { siret } = req.params;
-  Organizations.findAll({
+  Organizations.findOne({
     where: {
       siret: siret,
     },

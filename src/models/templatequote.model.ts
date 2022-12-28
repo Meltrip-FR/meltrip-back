@@ -1,15 +1,15 @@
-export const PayementModel = (sequelize: any, Sequelize: any) => {
+export const TemplateQuoteModel = (sequelize: any, Sequelize: any) => {
   return sequelize.define(
-    "payements",
+    "templatequotes",
     {
-      payementIntent: {
+      url: {
         type: Sequelize.STRING,
       },
-      urlPayement: {
+      urlPicture: {
         type: Sequelize.STRING,
       },
-      paye: {
-        type: Sequelize.BOOLEAN,
+      title: {
+        type: Sequelize.STRING,
       },
       price: {
         type: Sequelize.INTEGER,

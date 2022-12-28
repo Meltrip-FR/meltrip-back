@@ -15,6 +15,7 @@ import { PersonalityModel } from "./personality.model";
 import ForeignKey from "./foreignkey";
 import { QuoteModel } from "./quote.model";
 import { MembersModel } from "./members.model";
+import { TemplateQuoteModel } from "./templatequote.model";
 
 //Connect to SQL database
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
@@ -51,6 +52,8 @@ Database.ROLES = ["user", "admin"];
 Database.organizations = OrganizationModel(sequelize, Sequelize);
 // Quote
 Database.quotes = QuoteModel(sequelize, Sequelize);
+// Template Quote
+Database.templatequotes = TemplateQuoteModel(sequelize, Sequelize);
 // Payement
 Database.payements = PayementModel(sequelize, Sequelize);
 // Groups

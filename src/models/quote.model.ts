@@ -14,6 +14,9 @@ export const QuoteModel = (sequelize: any, Sequelize: any) => {
       proposeSelect: {
         type: Sequelize.STRING,
       },
+      price: {
+        type: Sequelize.INTEGER,
+      },
     },
     {
       paranoid: true,

@@ -1,5 +1,4 @@
 import Database from "../../models";
-// import { storage } from "../../config/firebase.config";
 
 const Image = Database.image;
 

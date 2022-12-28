@@ -42,11 +42,14 @@ export const SeminarModel = (sequelize: any, Sequelize: any) => {
       },
       status: {
         type: Sequelize.ENUM,
-        values: ["", "Attente", "Refusé", "Accepté"],
+        values: ["", "Attente", "Refusé", "Accepté", "Terminé"],
       },
       step: {
         type: Sequelize.ENUM,
         values: ["", "devis", "paiement", "question"],
+      },
+      pictureURL: {
+        type: Sequelize.STRING,
       },
       idUser: {
         type: Sequelize.INTEGER,

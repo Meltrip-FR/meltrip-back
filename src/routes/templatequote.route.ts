@@ -26,7 +26,7 @@ const TemplateQuoteRoute = (app: any) => {
   app.post("/templatequote", [verifyToken, isAdmin], Create);
   app.put("/templatequote/:id", [verifyToken, isAdmin], Update);
   app.delete("/templatequote/:id", [verifyToken, isAdmin], Delete);
-  app.get("/templatequote/:id", [verifyToken, isAdmin], FindOne);
+  app.get("/templatequote/:id", [verifyToken], FindOne);
   app.get("/templatequotes", [verifyToken, isAdmin], FindAll);
 };
 

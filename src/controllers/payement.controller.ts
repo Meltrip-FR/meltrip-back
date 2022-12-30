@@ -99,18 +99,18 @@ export const buyByStripe = async (
   res: Express.Response
 ) => {
   const { nameDevis, unitAmount, idSeminar } = req.body;
+  const product = await stripe.products.create({ name: nameDevis });
+  const price = await stripe.prices.create({
+    product: product.id,
+    unit_amount: unitAmount,
+    currency: "eur",
+  });
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: [
       {
-        price_data: {
-          currency: "eur",
-          product_data: {
-            name: nameDevis,
-          },
-          unit_amount: unitAmount,
-        },
+        price: price.id,
         quantity: 1,
       },
     ],
@@ -121,6 +121,7 @@ export const buyByStripe = async (
 
   if (session?.id) {
     const result = await Payement.create({
+      csId: session?.id,
       payementIntent: session.payment_intent,
       urlPayement: session.url,
       status: "En cours",
@@ -148,7 +149,7 @@ export const buyByStripe = async (
   }
 };
 
-export const webhook = (req: Express.Request, res: Express.Response) => {
+export const webhook = async (req: Express.Request, res: Express.Response) => {
   let event: any;
 
   try {
@@ -164,30 +165,33 @@ export const webhook = (req: Express.Request, res: Express.Response) => {
     return;
   }
 
-  // Handle the event
+  const invoice = await createInvoice(event.data.object.customer_details.email);
+
   switch (event.type) {
-    case "checkout.session.async_payment_failed":
+    case "checkout.session.payment_failed":
       Payement.update(
         {
           status: "Refusé",
           paye: 0,
         },
         {
-          where: { payementIntent: event.data.object.id },
+          where: { csId: event.data.object.id },
         }
       ).then((data: any) => {
         const result = data.dataValues;
         res.send({ ...{ sessionId: event.data.object.id }, ...result });
       });
       break;
-    case "checkout.session.async_payment_succeeded":
+    case "checkout.session.payment_succeeded":
       Payement.update(
         {
           status: "Terminé",
           paye: event.data.object.amount_total,
+          payementIntent: event.data.object.payment_intent,
+          urlInvoice: invoice,
         },
         {
-          where: { payementIntent: event.data.object.id },
+          where: { csId: event.data.object.id },
         }
       ).then((data: any) => {
         const result = data.dataValues;
@@ -199,9 +203,11 @@ export const webhook = (req: Express.Request, res: Express.Response) => {
         {
           status: "Terminé",
           paye: event.data.object.amount_total,
+          payementIntent: event.data.object.payment_intent,
+          urlInvoice: invoice,
         },
         {
-          where: { payementIntent: event.data.object.id },
+          where: { csId: event.data.object.id },
         }
       ).then((data: any) => {
         const result = data.dataValues;
@@ -215,7 +221,7 @@ export const webhook = (req: Express.Request, res: Express.Response) => {
           paye: 0,
         },
         {
-          where: { payementIntent: event.data.object.id },
+          where: { csId: event.data.object.id },
         }
       ).then((data: any) => {
         const result = data.dataValues;
@@ -229,4 +235,21 @@ export const webhook = (req: Express.Request, res: Express.Response) => {
 
   // Return a 200 response to acknowledge receipt of the event
   res.send();
+};
+
+export const createInvoice = async (email: any) => {
+  // Create a new Customer
+  let customer = await stripe.customers.create({
+    email,
+  });
+
+  const invo = await stripe.invoices.create({
+    customer: customer.id,
+    collection_method: "send_invoice",
+    days_until_due: 30,
+  });
+
+  const sinvoice = await stripe.invoices.sendInvoice(invo.id);
+
+  return sinvoice.hosted_invoice_url;
 };

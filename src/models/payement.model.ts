@@ -2,10 +2,19 @@ export const PayementModel = (sequelize: any, Sequelize: any) => {
   return sequelize.define(
     "payements",
     {
+      csId: {
+        type: Sequelize.TEXT,
+      },
+      cusId: {
+        type: Sequelize.TEXT,
+      },
       payementIntent: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       urlPayement: {
+        type: Sequelize.TEXT,
+      },
+      urlInvoice: {
         type: Sequelize.TEXT,
       },
       status: {

@@ -61,6 +61,23 @@ const ForeignKey = (Database: any) => {
     foreignKey: "idGroup",
   });
 
+  //Quote foreign_key []
+  Database.quotes.belongsTo(Database.templatequotes, {
+    through: "quotes",
+    foreignKey: "idTemplateQuote2",
+  });
+  //Quote foreign_key []
+  Database.quotes.belongsTo(Database.templatequotes, {
+    through: "quotes",
+    foreignKey: "idTemplateQuote3",
+  });
+
+  //Quote foreign_key []
+  Database.quotes.belongsTo(Database.templatequotes, {
+    through: "quotes",
+    foreignKey: "idTemplateQuote1",
+  });
+
   //Personality foreign_key []
   Database.personality.belongsTo(Database.members, {
     through: "personality",

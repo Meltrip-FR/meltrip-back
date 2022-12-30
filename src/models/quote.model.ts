@@ -12,9 +12,18 @@ export const QuoteModel = (sequelize: any, Sequelize: any) => {
         type: Sequelize.STRING,
       },
       proposeSelect: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       price: {
+        type: Sequelize.INTEGER,
+      },
+      idTemplateQuote1: {
+        type: Sequelize.INTEGER,
+      },
+      idTemplateQuote2: {
+        type: Sequelize.INTEGER,
+      },
+      idTemplateQuote3: {
         type: Sequelize.INTEGER,
       },
     },

@@ -1,4 +1,3 @@
-require("dotenv").config();
 import { cert, initializeApp } from "firebase-admin/app";
 import { getStorage } from "firebase-admin/storage";
 

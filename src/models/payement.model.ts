@@ -6,7 +6,11 @@ export const PayementModel = (sequelize: any, Sequelize: any) => {
         type: Sequelize.STRING,
       },
       urlPayement: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["", "En cours", "Refusé", "Accepté", "Terminé"],
       },
       paye: {
         type: Sequelize.BOOLEAN,

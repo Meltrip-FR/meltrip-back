@@ -27,7 +27,7 @@ export const FindAll = (req: Express.Request, res: Express.Response) => {
     })
     .catch((error: TypeError) => {
       res.status(500).send({
-        message: error.message || "Error retrieving basket with id=" + id,
+        message: error.message || "Error retrieving stripe with id=" + id,
       });
     });
 };

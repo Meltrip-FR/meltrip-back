@@ -1,6 +1,8 @@
 import Express from "express";
 import {
-  Create,
+  // Create,
+  buyByStripe,
+  webhook,
   FindOne,
   FindAll,
   Update,
@@ -22,11 +24,17 @@ const PayementRoute = (app: any) => {
     }
   );
 
-  app.post("/payement", Create);
+  // app.post("/payement", Create);
   app.put("/payement/:id", Update);
   app.delete("/payement/:id", Delete);
   app.get("/payement/:id", FindOne);
   app.get("/payements", FindAll);
+
+  app.post("/payement", buyByStripe);
+  app.post("/payement/webhook", webhook);
+  // app.post("/success/:token/", verifPay);
+  // app.get("/error/", error);
+  // app.get("/genere/:reserverId", findOneCode);
 };
 
 export default PayementRoute;

@@ -22,7 +22,7 @@ import TemplateQuoteRoute from "./src/routes/templatequote.route";
 
 // Constant
 let { PORT } = process.env;
-const isCleanDatabase = true; // FALSE: updateDB || TRUE:  createDB
+const isCleanDatabase = false; // FALSE: updateDB || TRUE:  createDB
 const app: Express.Application = Express();
 
 app.use(cors());

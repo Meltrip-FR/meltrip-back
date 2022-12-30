@@ -4,6 +4,8 @@ import {
   Delete,
   FindAll,
   FindAllByUserId,
+  FindOneByQuoteId,
+  FindOneByPayementId,
   FindOne,
   Update,
 } from "../controllers/seminar.controller";
@@ -27,6 +29,8 @@ const SeminarRoute = (app: any) => {
   app.post("/seminar", [verifyToken], Create);
   app.get("/seminar/:id", [verifyToken], FindOne);
   app.get("/seminars/:userId", [verifyToken], FindAllByUserId);
+  app.get("/seminar/quote/:quoteId", [verifyToken], FindOneByQuoteId);
+  app.get("/seminar/payement/:payementId", [verifyToken], FindOneByPayementId);
   app.get("/seminars", [verifyToken], FindAll);
   app.put("/seminar/:id", [verifyToken], Update);
   app.delete("/seminar/:id", [verifyToken], Delete);

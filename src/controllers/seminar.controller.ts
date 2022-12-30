@@ -47,6 +47,45 @@ export const FindAllByUserId = (
       });
     });
 };
+export const FindOneByQuoteId = (
+  req: Express.Request,
+  res: Express.Response
+) => {
+  const { quoteId } = req.params;
+  Seminar.findOne({
+    where: {
+      idQuote: quoteId,
+    },
+  })
+    .then(async (data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        message: error.message || "Error retrieving seminar with id=" + quoteId,
+      });
+    });
+};
+export const FindOneByPayementId = (
+  req: Express.Request,
+  res: Express.Response
+) => {
+  const { payementId } = req.params;
+  Seminar.findOne({
+    where: {
+      idPayement: payementId,
+    },
+  })
+    .then(async (data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        message:
+          error.message || "Error retrieving seminar with id=" + payementId,
+      });
+    });
+};
 export const FindAll = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Seminar.findAll()

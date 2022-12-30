@@ -6,6 +6,7 @@ import Database from "../models";
 dotenv.config();
 
 const Payement = Database.payements;
+const Seminar = Database.seminars;
 
 export const Create = (req: Express.Request, res: Express.Response) => {
   Payement.create({ ...req.body })
@@ -97,7 +98,7 @@ export const buyByStripe = async (
   req: Express.Request,
   res: Express.Response
 ) => {
-  const { nameDevis, unitAmount } = req.body;
+  const { nameDevis, unitAmount, idSeminar } = req.body;
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -120,7 +121,7 @@ export const buyByStripe = async (
 
   if (session?.id) {
     const result = await Payement.create({
-      payementIntent: session.id,
+      payementIntent: session.payment_intent,
       urlPayement: session.url,
       status: "En cours",
       paye: 0,
@@ -129,6 +130,17 @@ export const buyByStripe = async (
 
     if (result) {
       const data = result.dataValues;
+      await Seminar.update(
+        {
+          idPayement: data.id,
+        },
+        {
+          where: {
+            id: idSeminar,
+          },
+        }
+      );
+
       res.send({ ...{ sessionId: session.id }, ...data });
     } else {
       res.send("Some error occured while creating the Payement");

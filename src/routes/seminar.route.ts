@@ -27,7 +27,7 @@ const SeminarRoute = (app: any) => {
   );
 
   app.post("/seminar", [verifyToken], Create);
-  app.get("/seminar/:id", [verifyToken], FindOne);
+  app.get("/seminar/:id", FindOne);
   app.get("/seminars/:userId", [verifyToken], FindAllByUserId);
   app.get("/seminar/quote/:quoteId", [verifyToken], FindOneByQuoteId);
   app.get("/seminar/payement/:payementId", [verifyToken], FindOneByPayementId);

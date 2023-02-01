@@ -2,6 +2,7 @@ import Express from "express";
 import Database from "../models";
 
 const Groups = Database.groups;
+const Members = Database.groups;
 
 export const Create = (req: Express.Request, res: Express.Response) => {
   Groups.create({ ...req.body })
@@ -30,6 +31,21 @@ export const FindOne = (req: Express.Request, res: Express.Response) => {
 export const FindAll = (req: Express.Request, res: Express.Response) => {
   const { id } = req.params;
   Groups.findAll()
+    .then(async (data: any) => {
+      res.send(data);
+    })
+    .catch((error: TypeError) => {
+      res.status(500).send({
+        message: error.message || "Error retrieving Group with id=" + id,
+      });
+    });
+};
+export const FindAllByGroupId = (
+  req: Express.Request,
+  res: Express.Response
+) => {
+  const { id } = req.params;
+  Members.findAll({ where: { groupId: id } })
     .then(async (data: any) => {
       res.send(data);
     })

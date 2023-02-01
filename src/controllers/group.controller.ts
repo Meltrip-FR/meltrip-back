@@ -2,7 +2,7 @@ import Express from "express";
 import Database from "../models";
 
 const Groups = Database.groups;
-const Members = Database.groups;
+const Members = Database.members;
 
 export const Create = (req: Express.Request, res: Express.Response) => {
   Groups.create({ ...req.body })
@@ -45,7 +45,7 @@ export const FindAllByGroupId = (
   res: Express.Response
 ) => {
   const { id } = req.params;
-  Members.findAll({ where: { groupId: id } })
+  Members.findAll({ where: { idGroup: id } })
     .then(async (data: any) => {
       res.send(data);
     })

@@ -27,7 +27,7 @@ const GroupRoute = (app: any) => {
   app.put("/group/:id", Update);
   app.delete("/group/:id", Delete);
   app.get("/group/:id", FindOne);
-  app.get("/group/member", FindAllByGroupId);
+  app.get("/group/member/:id", FindAllByGroupId);
   app.get("/groups", FindAll);
 };
 

@@ -55,6 +55,7 @@ describe("Payment Controller", () => {
         data
       );
       expect(response.status).toBe(200);
+      expect(response.data.urlPayement).toBeTruthy();
     });
   });
 });

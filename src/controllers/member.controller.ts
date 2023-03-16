@@ -11,7 +11,7 @@ export const Create = (req: Express.Request, res: Express.Response) => {
     .catch((error: any) => {
       res.status(500).send({
         message:
-          error.message || "Some error occured while creating the organization",
+          error.message || "Some error occured while creating the members",
       });
     });
 };

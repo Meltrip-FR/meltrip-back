@@ -11,8 +11,11 @@ export const MembersModel = (sequelize: any, Sequelize: any) => {
       present: {
         type: Sequelize.BOOLEAN,
       },
-      resultTest: {
+      resultState: {
         type: Sequelize.INTEGER,
+      },
+      resultType: {
+        type: Sequelize.STRING,
       },
     },
     {

@@ -5,7 +5,7 @@ import {
   FindAll,
   Update,
   Delete,
-} from "../controllers/organization.controller";
+} from "../controllers/member.controller";
 import { verifyData } from "./middleware/verifyData";
 
 const MemberRoute = (app: any) => {

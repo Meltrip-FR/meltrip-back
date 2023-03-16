@@ -3,7 +3,7 @@ import Database from "../models";
 import axios from "axios";
 import { generatedToken } from "../tools/generatedToken";
 
-const Organizations = Database.organizations;
+export const Organizations = Database.organizations;
 
 export const Create = async (req: Express.Request, res: Express.Response) => {
   const newInseeToken = await generatedToken();

@@ -93,7 +93,6 @@ export const Delete = (req: Express.Request, res: Express.Response) => {
       });
     });
 };
-
 export const buyByStripe = async (
   req: Express.Request,
   res: Express.Response
@@ -119,6 +118,7 @@ export const buyByStripe = async (
     cancel_url: `https://meltrip.fr/user/payments`,
   });
 
+  console.log({ session });
   if (session?.id) {
     const result = await Payement.create({
       csId: session?.id,
@@ -129,8 +129,10 @@ export const buyByStripe = async (
       price: unitAmount,
     });
 
+    console.log({ result });
     if (result) {
       const data = result.dataValues;
+
       await Seminar.update(
         {
           idPayement: data.id,
@@ -148,7 +150,6 @@ export const buyByStripe = async (
     }
   }
 };
-
 export const webhook = async (req: Express.Request, res: Express.Response) => {
   let event: any;
 
@@ -165,8 +166,8 @@ export const webhook = async (req: Express.Request, res: Express.Response) => {
     return;
   }
 
+  console.log({ event: event.type });
   const invoice = await createInvoice(event.data.object.customer_details.email);
-
   switch (event.type) {
     case "checkout.session.payment_failed":
       Payement.update(
@@ -228,15 +229,11 @@ export const webhook = async (req: Express.Request, res: Express.Response) => {
         res.send({ ...{ sessionId: event.data.object.id }, ...result });
       });
       break;
-    // ... handle other event types
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
-
-  // Return a 200 response to acknowledge receipt of the event
   res.send();
 };
-
 export const createInvoice = async (email: any) => {
   // Create a new Customer
   let customer = await stripe.customers.create({

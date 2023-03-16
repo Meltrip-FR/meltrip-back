@@ -4,6 +4,9 @@ on:
     branches:
       - develop
 
-  steps:
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+jobs:
+  build_and_preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
